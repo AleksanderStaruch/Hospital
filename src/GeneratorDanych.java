@@ -1,5 +1,4 @@
 import model.Address;
-import model.ISurgeon;
 import model.MedicalWorker;
 import model.actors.*;
 
@@ -219,16 +218,19 @@ public class GeneratorDanych {
         Double salary;
         String education;
         MedicalWorker.Degree degree;
-        ISurgeon.Type type;
+        String specialization;
+        Surgeon.Type type;
         if(b){
 
             name=maleName.get(randomizer(maleName.size()));
             PESEL = malePESEL.get(randomizer(malePESELid));
-            type = ISurgeon.Type.CARDIO;
+            type = Surgeon.Type.CARDIO;
+            specialization = "";
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
             PESEL = femalePESEL.get(femalePESELid);
-            type = ISurgeon.Type.NEURO;
+            type = Surgeon.Type.NEURO;
+            specialization = "";
         }
         surname=surnames.get(randomizer(surnames.size()));
         mail = mail(name,surname,1);
@@ -239,7 +241,7 @@ public class GeneratorDanych {
         education="";
         degree = MedicalWorker.Degree.DOCTOR_DEGREE;
 
-        Surgeon surgeon = new Surgeon(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,type);
+        Surgeon surgeon = new Surgeon(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization,type);
         if(b){
             malePESELid++;
         }else{
@@ -260,17 +262,17 @@ public class GeneratorDanych {
         String education;
         MedicalWorker.Degree degree;
         String specialization;
-        ISurgeon.Type type;
+        Surgeon.Type type;
         if(b){
             name=maleName.get(randomizer(maleName.size()));
             PESEL = malePESEL.get(malePESELid);
             specialization = "";
-            type = ISurgeon.Type.NEURO;
+            type = Surgeon.Type.NEURO;
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
             PESEL = femalePESEL.get(femalePESELid);
             specialization = "";
-            type = ISurgeon.Type.CARDIO;
+            type = Surgeon.Type.CARDIO;
         }
         surname=surnames.get(randomizer(surnames.size()));
         mail = mail(name,surname,1);
@@ -281,7 +283,7 @@ public class GeneratorDanych {
         education="";
         degree = MedicalWorker.Degree.PROFESSOR_DEGREE ;
 
-        HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization,LocalDate.now(),type);
+        HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization,type,LocalDate.now());
         if(b){
             malePESELid++;
         }else{

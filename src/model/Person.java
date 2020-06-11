@@ -46,7 +46,7 @@ public abstract class Person {
         this.id = id;
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getName() { return name; }
     public void setName(String name) throws Exception {
         String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,15}$";
@@ -55,7 +55,7 @@ public abstract class Person {
         this.name = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getSurname() { return surname; }
     public void setSurname(String surname) throws Exception {
         String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,15}$";
@@ -64,7 +64,7 @@ public abstract class Person {
         this.surname = surname.substring(0,1).toUpperCase() + surname.substring(1).toLowerCase();
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getPESEL() { return PESEL; }
     public void setPESEL(String PESEL) throws Exception {
         String pattern = "^(?=.*[0-9]).{11}$";
@@ -85,7 +85,7 @@ public abstract class Person {
         this.address = address;
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) throws Exception {
         String pattern = "^(?=.*[0-9]).{9}$";
@@ -94,18 +94,19 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    @Basic
+    @Basic(optional = false)
     public boolean getSex() { return sex; }
     public void setSex(boolean sex) { this.sex = sex; }
 
-    @Basic
+    @Basic(optional = false)
     public LocalDate getBirthDate() { return birthDate; }
     public void setBirthDate(LocalDate birthDate) {
         if(birthDate == null){throw new NullPointerException("Birth date field cannot be empty.");}
         this.birthDate = birthDate;
     }
 
-    @Basic
+
+    @Basic(optional = true)
     public String getMail() { return mail; }
     public void setMail(String mail) { this.mail = mail; }
 

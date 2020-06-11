@@ -175,14 +175,14 @@ public class Main {
     public static void main(final String[] args) throws Exception {
         final Session session = getSession();
         try {
-            create(session);
+//            create(session);
             System.err.println("--------------------");
-            print(session,"Person");
+//            print(session,"Person");
 //            print(session,"Worker");
 //            System.out.println(GeneratorDanych.femalePESELid);
 //            System.out.println(GeneratorDanych.malePESELid);
 //            System.out.println(Person.getPESELs());
-//            print(session);
+            print(session);
 //
 
 //            List<Hospital> hospitalList = session.createQuery("from Hospital ").list();

@@ -38,7 +38,7 @@ public abstract class MedicalWorker extends Worker {
 //        this.medicalTreatmentList = medicalTreatmentList;
 //    }
 
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     public Degree getDegree(){ return degree; }
     public void setDegree(Degree degree){
         if(degree == null){throw new NullPointerException("Degree field cannot be empty.");}

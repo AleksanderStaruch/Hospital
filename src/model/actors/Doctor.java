@@ -24,7 +24,7 @@ public class Doctor extends MedicalWorker {
         System.out.println("Doctor "+getName()+" "+getSurname()+" is performing medical treatment");
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getSpecialization() { return specialization; }
     public void setSpecialization(String specialization) {
         if(specialization == null){throw new NullPointerException("Specialization field cannot be empty.");}

@@ -45,7 +45,7 @@ public class Patient extends Person {
         this.getPatientRooms().add(stay);
     }
 
-    @Basic
+    @Basic(optional = false)
     public LocalDate getRegistrationDate() { return registrationDate; }
     public void setRegistrationDate(LocalDate registrationDate) {
         if(registrationDate == null){throw new NullPointerException("Password field cannot be empty.");}

@@ -27,7 +27,7 @@ public abstract class Worker extends Person {
         this.setEducation(education);
     }
 
-    @Basic
+    @Basic(optional = false)
     public double getSalary() {
         return salary;
     }
@@ -41,7 +41,7 @@ public abstract class Worker extends Person {
         }
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getEducation() {
         return education;
     }
@@ -50,7 +50,7 @@ public abstract class Worker extends Person {
         this.education = education;
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getLogin() { return login; }
     public void setLogin(String login) throws Exception {
         String pattern = "^(?=.*[a-z])(?=\\S+$).{2,}$";
@@ -61,7 +61,7 @@ public abstract class Worker extends Person {
         this.login = login;
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getPassword() { return password; }
     public void setPassword(String password) throws Exception {
         String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{4,}$";

@@ -57,14 +57,14 @@ public class PatientRoom {
         this.patient = patient;
     }
 
-    @Basic
+    @Basic(optional = false)
     public LocalDate getFromm() { return fromm; }
     public void setFromm(LocalDate fromm) {
         if(fromm == null){throw new NullPointerException("Date from field cannot be empty.");}
         this.fromm = fromm;
     }
 
-    @Basic
+    @Basic(optional = true)
     public LocalDate getTo() { return to; }
     public void setTo(LocalDate to) { this.to = to; }
 

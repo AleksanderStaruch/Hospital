@@ -40,35 +40,35 @@ public abstract class MedicalTreatment {
     public long getId() { return id; }
     private void setId(long id) { this.id = id; }
 
-    @Basic
+    @Basic(optional = false)
     public String getName() { return name; }
     public void setName(String name) {
         if(name == null){throw new NullPointerException("Name field cannot be empty.");}
         this.name = name;
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getDescription() { return description; }
     public void setDescription(String text) {
         if(text == null){throw new NullPointerException("Description field cannot be empty.");}
         this.description = text;
     }
 
-    @Basic
+    @Basic(optional = false)
     public Double getCost() { return cost; }
     public void setCost(Double cost) {
         if(cost == null){throw new NullPointerException("Cost field cannot be empty.");}
         this.cost = cost;
     }
 
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     public State getState() { return state; }
     public void setState(State state) {
         if(state == null){throw new NullPointerException("State field cannot be empty.");}
         this.state = state;
     }
 
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     public Type getType() { return type; }
     public void setType(Type type) {
         if(type == null){throw new NullPointerException("Type field cannot be empty.");}
