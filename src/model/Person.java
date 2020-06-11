@@ -5,23 +5,28 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "Person")
+//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"PESEL"}))
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@MappedSuperclass
 public abstract class Person {
     private long id;
     private String name;
     private String surname;
-    private String PESEL;
+    private String PESEL;//unikalny
     private Address address;//zlozony
     private String phoneNumber;
     private boolean sex;//male=true,female=false
     private LocalDate birthDate;//zlozony
     private String mail;//opcjonalny
 
-    public Person(){}
+    private static List<String> PESELs = new ArrayList<>();
 
+    public Person(){}
     public Person(String name, String surname, String PESEL, Address address, String phoneNumber, String mail)throws Exception {
         this.setName(name);
         this.setSurname(surname);
@@ -43,22 +48,32 @@ public abstract class Person {
 
     @Basic
     public String getName() { return name; }
-    public void setName(String name) {
+    public void setName(String name) throws Exception {
+        String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,15}$";
         if(name == null){throw new NullPointerException("Name field cannot be empty.");}
-        this.name = name;
+        if(!name.matches(pattern)){throw new Exception("Name is wrong to name policy ("+name+").");}
+        this.name = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
     }
 
     @Basic
     public String getSurname() { return surname; }
-    public void setSurname(String surname) {
+    public void setSurname(String surname) throws Exception {
+        String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{2,15}$";
         if(surname == null){throw new NullPointerException("Surname field cannot be empty.");}
-        this.surname = surname;
+        if(!surname.matches(pattern)){throw new Exception("Surname is wrong to surname policy ("+surname+").");}
+        this.surname = surname.substring(0,1).toUpperCase() + surname.substring(1).toLowerCase();
     }
 
     @Basic
     public String getPESEL() { return PESEL; }
-    public void setPESEL(String PESEL) {
+    public void setPESEL(String PESEL) throws Exception {
+        String pattern = "^(?=.*[0-9]).{11}$";
         if(PESEL == null){throw new NullPointerException("PESEL field cannot be empty.");}
+        if(!PESEL.matches(pattern)){throw new Exception("PESEL is wrong to PESEL policy ("+PESEL+").");}
+//        TODO fix it
+//        if(!isUnique(PESELs,PESEL)){throw new Exception("There is someone with this PESEL ("+PESEL+" "+name+" "+surname+").");}
+//        if(PESELs.contains(PESEL)){throw new Exception("There is someone with this PESEL ("+PESEL+" "+name+" "+surname+").");}
+//        PESELs.add(PESEL);
         this.PESEL = PESEL;
         sex = ((Integer.parseInt(PESEL.substring(9,10)))%2 == 0);
     }
@@ -72,8 +87,10 @@ public abstract class Person {
 
     @Basic
     public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) throws Exception {
+        String pattern = "^(?=.*[0-9]).{9}$";
         if(phoneNumber == null){throw new NullPointerException("Phone number field cannot be empty.");}
+        if(!phoneNumber.matches(pattern)){throw new Exception("Phone number is wrong to Phone number policy ("+phoneNumber+").");}
         this.phoneNumber = phoneNumber;
     }
 
@@ -134,6 +151,26 @@ public abstract class Person {
         }
 
         return LocalDate.of(y, m, d);
+    }
+
+    protected boolean isUnique(List<String> strings,String string){
+        for(String s:strings){
+            if(s.equals(string)){
+                return false;
+            }
+        }
+        System.out.println("List:"+strings);
+        System.out.println("Element:"+string);
+        return true;
+    }
+
+//    delete later
+    public static List<String> getPESELs() {
+        return PESELs;
+    }
+
+    public static void setPESELs(List<String> PESELs) {
+        Person.PESELs = PESELs;
     }
 
     @Override

@@ -10,10 +10,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneratorDanych {
 
+    public static int femalePESELid = 0;
+    public static int malePESELid = 0;
+    
     static List<String> maleName = List.of("Liam","Noah","William","James","Oliver","Benjamin","Elijah","Lucas","Mason","Logan","Alexander","Ethan","Jacob","Michael","Daniel","Henry","Jackson","Sebastian","Aiden","Matthew","Samuel","David","Joseph","Carter","Owen","Wyatt","John","Jack","Luke","Jayden","Dylan","Grayson","Levi","Isaac","Gabriel","Julian","Mateo","Anthony","Jaxon","Lincoln","Joshua","Christopher","Andrew","Theodore","Caleb","Ryan","Asher","Nathan","Thomas","Leo");
     static List<String>  femaleName = List.of("Emma","Olivia","Ava","Isabella","Sophia","Charlotte","Mia","Amelia","Harper","Evelyn","Abigail","Emily","Elizabeth","Mila","Ella","Avery","Sofia","Camila","Aria","Scarlett","Victoria","Madison","Luna","Grace","Chloe","Penelope","Layla","Riley","Zoey","Nora","Lily","Eleanor","Hannah","Lillian","Addison","Aubrey","Ellie","Stella","Natalie","Zoe","Leah","Hazel","Violet","Aurora","Savannah","Audrey","Brooklyn","Bella","Claire","Skylar");
-    static List<String>  malePESEL = List.of("60012375895","49112012457","74011572535","47042639199","70091812354","60123066895","53060883753","95090293894","74121276259","95051343938","84021199615","99110157175","71121453116","79060241412","68021359877","77012061475","76062748534","45053168792","02252322811","83021148254","04212866799","83032693877","94012324313","62012046418","63021237716","72011696774","89051453531","92012672436","01301075674","03222844153","85032753555","65032341479","64040659392","93122641512","66110143156","72061659657","57100166879","72113099219","52021688257","89120543833","68122171231","88031392819","53080541651","71092853117","70101123117","45060573853","63111188496","59090823538","83120124951","47080285433");
-    static List<String>  femalePESEL = List.of("57030415522","83110243884","63102382522","96061688446","96091918586","89042978443","70072741222","02211568926","57032443886","67072887722","47112619643","97030362943","84031518787","73101712864","62051251682","02232647248","88092868786","92112467246","97032357684","86100428429","87112594962","63010819325","04311928745","92010432142","99061577286","03300194862","03231974465","81091495823","78050992945","89110156182","65080579989","59111347261","70120423722","58041359382","57041291269","65063083269","47112546888","60082049469","45112621347","59040789844","61010294281","65110524183","48060877422","94060474527","02262996161","47111321686","64060649469","49122323828","89081999186","91121268484");
+    static List<String>  malePESEL = List.of("48040249193","57091747758","83030974592","49111453411","73050485853","67072991818","01241781857","79071983453","72110575217","93061255735","87111882693","01300784713","02280663438","01271948712","92070492672","61102255334","92042373293","48073092319","81062182518","56122468257","66112046532","96091025996","86092978737","71052352636","72113053297","99073133793","50071693454","75050829356","63060556533","98013164394","95020576833","87021417819","77072386954","71073147635","46081385814","00251331674","87120212258","95061569195","51091621696","63071061116","51030642872","90053053759","56060492116","92062981236","87112236675","03241751333","50031633773","93021161337","73061862739","95100117358","76102347235","69050395913","78022286553","56100395232","89073077939","76020831751","49032642976","72042852873","66092789999","01302193315","69101992858","89060323551","70090475754","73042354754","49102981251","57050316573","66032577758","04211275837","83052197977","50052728179","92051887372","71031526696","04322135572","97111243279","52011172498","94042152999","65040737237","88071692197","56010178356","45122255459","56070589774","70121924512","76041166412","97112078551","99010589591","84041314193","00232231858","85022066513","47092167714","85012892131","98071796876","50091475717","01231672512","58121586253","63071722213","66031812436","60060316758","92082269958","54011552135");
+    static List<String>  femalePESEL = List.of("53010482445","96060499287","95112895389","65032466422","03291433227","54051012224","83110911769","74072836724","63072555722","85091399422","86012254921","94120987763","60111884643","49011676848","93030395886","96111577429","89081869944","68072351125","72040361889","64092823943","51092947445","92101018244","03302293743","81082585566","76032274487","64052169528","87122343161","69111628549","98090423843","60112496748","57040648666","60091449421","58103046849","70050137582","58040985243","96011947128","96110392366","90011143249","98101078961","96081146166","96121684946","64081964127","90081191324","55110438443","83091539288","63081932228","04310923468","49071151947","66122988943","89040482966","80081828481","98072134446","58032137784","64091919166","49031569164","91061395549","78112655584","85041192389","70071397868","97070797369","63101395925","47041988881","84052194964","70072085342","74071014943","61060591864","56120376543","64030727229","54032861221","52100581125","92081522562","55080291727","70071993941","00220618964","51121493769","81100523662","74091856389","49092055464","89042335385","57120539989","57022736428","56080771983","97091937489","84020695785","52011588129","86011427968","66010913143","95092452565","00320794988","89011623464","77013167323","54072229564","75121969224","82042658287","74100561268","58041623449","57080569943","00250956128","64012397167");
     static List<String>  surnames = List.of("Smith","Johnson","Williams","Jones","Brown","Davis","Miller","Wilson","Moore","Taylor","Anderson","Thomas","Jackson","White","Harris","Martin","Thompson","Garcia","Martinez","Robinson","Clark","Rodriguez","Lewis","Lee","Walker","Hall","Allen","Young","Hernandez","King","Wright","Lopez","Hill","Scott","Green","Adams","Baker","Gonzalez","Nelson","Carter","Mitchell","Perez","Roberts","Turner","Phillips","Campbell","Parker","Evans","Edwards","Collins");
     static List<String>  streets = List.of("Abecadło","Achillesa","Babicka","Babie Lato","Babiego Lata","Babimojska","Babinicza","Cegielniana","Ceglana","Cegłowska","Celestynowska","Celna","Celofanowa","Celtów","Grabiny","Grabowa","Grabowska","Grafitowa","Grajewska","Graniczna","Graniczna","Granitowa","Hipotezy","Historyczna","Marka Hłaski","Hodowlana","Holenderska","Krowia","Króla Artura","Króla Maciusia","Królewska","Królowej Aldony","Odblask","Odeska","Odkryta","Odległa","Odlewnicza","Odłogi","Odmienna","Odolańska","Odpoczynek","Olchy","Olchy","Olczyska","Oleandrów","Olecka","Oleńki","Olesin","Olesińska","Olgierda","Olimpijska","Oliwkowa","Tristana","Trocinowa","Trocka","Trojaka","Trojanowska","Trojańska","Trombity","Trójpolowa");
 
@@ -60,23 +63,34 @@ public class GeneratorDanych {
         long maxDay = LocalDate.of(2019, 12, 31).toEpochDay();
         long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
         LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
+
+        String name;
+        String surname;
+        String mail;
+        String phone;
+        String PESEL;
         if(b){
-            String name=maleName.get(randomizer(50));
-            String surname=surnames.get(randomizer(50));
-            String mail = mail(name,surname,0);
-            String phone = phone();
-            String PESEL = malePESEL.get(randomizer(50));
-
-            return new Patient(name,surname,PESEL,generatorA(),phone,mail,randomDate);
+            name=maleName.get(randomizer(50));
+            surname=surnames.get(randomizer(50));
+            mail = mail(name,surname,0);
+            phone = phone();
+            PESEL = malePESEL.get(malePESELid);
         }else{
-            String name=femaleName.get(randomizer(50));
-            String surname=surnames.get(randomizer(50));
-            String mail = mail(name,surname,1);
-            String phone = phone();
-            String PESEL = femalePESEL.get(randomizer(50));
-
-            return new Patient(name,surname,PESEL,generatorA(),phone,mail,randomDate);
+            name=femaleName.get(randomizer(50));
+            surname=surnames.get(randomizer(50));
+            mail = mail(name,surname,1);
+            phone = phone();
+            PESEL = femalePESEL.get(femalePESELid);
         }
+
+        Patient patient = new Patient(name,surname,PESEL,generatorA(),phone,mail,randomDate);
+        if(b){
+            malePESELid++;
+        }else{
+            femalePESELid++;
+        }
+        System.out.println(PESEL);
+        return patient;
     }
 
     public static Receptionist generatorReceptionist(boolean b) throws Exception {
@@ -92,22 +106,28 @@ public class GeneratorDanych {
         List<String> languages;
         if(b){
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESEL.size()));
+            PESEL = malePESEL.get(randomizer(malePESELid));
             languages=List.of("polski","niemiecki","angieslki");
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
-            PESEL = femalePESEL.get(randomizer(femaleName.size()));
+            PESEL = femalePESEL.get(femalePESELid);
             languages=List.of("polski","niemiecki","angieslki","francuski");
         }
         surname=surnames.get(randomizer(surnames.size()));
         mail = mail(name,surname,1);
         phone = phone();
         login=name.substring(0,1)+surname;
-        password="Receptionist1@";
+        password="Receptionist1!";
         salary=(double)(randomizer(1500)+1500);
         education="";
-
-        return new Receptionist(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,languages);
+        Receptionist receptionist = new Receptionist(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,languages);
+        if(b){
+            malePESELid++;
+        }else{
+            femalePESELid++;
+        }
+        System.out.println(PESEL);
+        return receptionist;
     }
     public static Nurse generatorNurse(boolean b) throws Exception {
         String name;
@@ -123,11 +143,11 @@ public class GeneratorDanych {
         MedicalWorker.Degree degree;
         if(b){
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESEL.size()));
+            PESEL = malePESEL.get(randomizer(malePESELid));
             certificates=List.of();
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
-            PESEL = femalePESEL.get(randomizer(femaleName.size()));
+            PESEL = femalePESEL.get(femalePESELid);
             certificates=List.of();
         }
         surname=surnames.get(randomizer(surnames.size()));
@@ -138,7 +158,15 @@ public class GeneratorDanych {
         salary=(double)(randomizer(1500)+2000);
         education="";
         degree = MedicalWorker.Degree.MASTER_DEGREE;
-        return new Nurse(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,certificates);
+        
+        Nurse nurse = new Nurse(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,certificates);
+        if(b){
+            malePESELid++;
+        }else{
+            femalePESELid++;
+        }
+        System.out.println(PESEL);
+        return nurse;
     }
 
     public static Doctor generatorDoctor(boolean b) throws Exception {
@@ -156,11 +184,11 @@ public class GeneratorDanych {
         if(b){
 
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESEL.size()));
+            PESEL = malePESEL.get(randomizer(malePESELid));
             specialization = "";
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
-            PESEL = femalePESEL.get(randomizer(femaleName.size()));
+            PESEL = femalePESEL.get(femalePESELid);
             specialization = "";
         }
         surname=surnames.get(randomizer(surnames.size()));
@@ -171,7 +199,14 @@ public class GeneratorDanych {
         salary=(double)(randomizer(1500)+5000);
         education="";
         degree = MedicalWorker.Degree.DOCTOR_DEGREE;
-        return new Doctor(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization);
+        Doctor doctor = new Doctor(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization);
+        if(b){
+            malePESELid++;
+        }else{
+            femalePESELid++;
+        }
+        System.out.println(PESEL);
+        return doctor;
     }
     public static Surgeon generatorSurgeon(boolean b) throws Exception {
         String name;
@@ -188,11 +223,11 @@ public class GeneratorDanych {
         if(b){
 
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESEL.size()));
+            PESEL = malePESEL.get(randomizer(malePESELid));
             type = ISurgeon.Type.CARDIO;
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
-            PESEL = femalePESEL.get(randomizer(femaleName.size()));
+            PESEL = femalePESEL.get(femalePESELid);
             type = ISurgeon.Type.NEURO;
         }
         surname=surnames.get(randomizer(surnames.size()));
@@ -203,7 +238,15 @@ public class GeneratorDanych {
         salary=(double)(randomizer(1500)+10000);
         education="";
         degree = MedicalWorker.Degree.DOCTOR_DEGREE;
-        return new Surgeon(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,type);
+
+        Surgeon surgeon = new Surgeon(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,type);
+        if(b){
+            malePESELid++;
+        }else{
+            femalePESELid++;
+        }
+        System.out.println(PESEL);
+        return surgeon;
     }
     public static HospitalAdministrator generatorAdmin(boolean b) throws Exception {
         String name;
@@ -220,12 +263,12 @@ public class GeneratorDanych {
         ISurgeon.Type type;
         if(b){
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESEL.size()));
+            PESEL = malePESEL.get(malePESELid);
             specialization = "";
             type = ISurgeon.Type.NEURO;
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
-            PESEL = femalePESEL.get(randomizer(femaleName.size()));
+            PESEL = femalePESEL.get(femalePESELid);
             specialization = "";
             type = ISurgeon.Type.CARDIO;
         }
@@ -237,7 +280,15 @@ public class GeneratorDanych {
         salary= (double) (randomizer(1500) + 15000);
         education="";
         degree = MedicalWorker.Degree.PROFESSOR_DEGREE ;
-        return new HospitalAdministrator(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization,LocalDate.now(),type);
+
+        HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization,LocalDate.now(),type);
+        if(b){
+            malePESELid++;
+        }else{
+            femalePESELid++;
+        }
+        System.out.println(PESEL);
+        return hospitalAdministrator;
 
     }
 

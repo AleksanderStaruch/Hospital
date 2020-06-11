@@ -21,7 +21,7 @@ public class Patient extends Person {
     public Patient() {}
     public Patient(String name, String surname, String PESEL, Address address, String phoneNumber, String mail, LocalDate registrationDate) throws Exception {
         super(name, surname, PESEL, address, phoneNumber, mail);
-
+//        TODO birthday > registrationDate
         this.setRegistrationDate(registrationDate);
         patientRooms = new ArrayList<>();
     }

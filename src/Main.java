@@ -56,69 +56,79 @@ public class Main {
         Room room15;
         Room room16;
 
-
-
-
         for(int i =0;i<50;i++){
             try{
                 Patient patient = GeneratorDanych.generatorPatient(new Random().nextBoolean());
                 session.save(patient);
-                session.beginTransaction();
-                session.getTransaction().commit();
-            }catch (Exception ex){ex.printStackTrace();}
+            }catch (Exception ex){
+                ex.printStackTrace();
+//                System.err.println(ex);
+            }
         }
+        session.beginTransaction();
+        session.getTransaction().commit();
 
         for(int i =0;i<10;i++){
-        try{
-            Receptionist receptionist = GeneratorDanych.generatorReceptionist(new Random().nextBoolean());
-            session.save(receptionist);
-            session.beginTransaction();
-            session.getTransaction().commit();
-        }catch (Exception ex){ex.printStackTrace();}
+            try{
+                Receptionist receptionist = GeneratorDanych.generatorReceptionist(new Random().nextBoolean());
+                session.save(receptionist);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
+        session.beginTransaction();
+        session.getTransaction().commit();
 
         for(int i =0;i<20;i++){
             try{
                 Nurse nurse = GeneratorDanych.generatorNurse(new Random().nextBoolean());
                 session.save(nurse);
-                session.beginTransaction();
-                session.getTransaction().commit();
-            }catch (Exception ex){ex.printStackTrace();}
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
+        session.beginTransaction();
+        session.getTransaction().commit();
 
         for(int i =0;i<20;i++){
             try{
                 Doctor doctor = GeneratorDanych.generatorDoctor(new Random().nextBoolean());
                 session.save(doctor);
-                session.beginTransaction();
-                session.getTransaction().commit();
-            }catch (Exception ex){ex.printStackTrace();}
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
+        session.beginTransaction();
+        session.getTransaction().commit();
 
         for(int i =0;i<10;i++){
             try{
                 Surgeon surgeon = GeneratorDanych.generatorSurgeon(new Random().nextBoolean());
                 session.save(surgeon);
-                session.beginTransaction();
-                session.getTransaction().commit();
-            }catch (Exception ex){ex.printStackTrace();}
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
+        session.beginTransaction();
+        session.getTransaction().commit();
 
         for(int i =0;i<2;i++){
             try{
                 HospitalAdministrator hospitalAdministrator = GeneratorDanych.generatorAdmin(new Random().nextBoolean());
                 session.save(hospitalAdministrator);
-                session.beginTransaction();
-                session.getTransaction().commit();
-            }catch (Exception ex){ex.printStackTrace();}
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
+        session.beginTransaction();
+        session.getTransaction().commit();
 
     }
 
     private static void print(Session session, String table){
-        List<Worker> list = session.createQuery("from "+table).list();
-        for(Worker person :list){
-            System.out.println(person.getLogin());
+        List<Person> list = session.createQuery("from "+table).list();
+        for(Person person :list){
+            System.out.println(person);
         }
     }
 
@@ -166,8 +176,13 @@ public class Main {
         final Session session = getSession();
         try {
             create(session);
+            System.err.println("--------------------");
+            print(session,"Person");
+//            print(session,"Worker");
+//            System.out.println(GeneratorDanych.femalePESELid);
+//            System.out.println(GeneratorDanych.malePESELid);
+//            System.out.println(Person.getPESELs());
 //            print(session);
-            print(session,"Worker");
 //
 
 //            List<Hospital> hospitalList = session.createQuery("from Hospital ").list();
