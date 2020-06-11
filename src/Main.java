@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,10 +26,9 @@ public class Main {
         return ourSessionFactory.openSession();
     }
 
-    private static void create(Session session) throws Exception {
+    private static List<Person> create(Session session) throws Exception {
 
-        Hospital hospital1;
-        Hospital hospital2;
+        Hospital hospital;
 
         Department department1;
         Department department2;
@@ -55,80 +55,83 @@ public class Main {
         Room room14;
         Room room15;
         Room room16;
+        List<Person> list = new ArrayList<>();
 
         for(int i =0;i<50;i++){
             try{
                 Patient patient = GeneratorDanych.generatorPatient(new Random().nextBoolean());
+                list.add(patient);
+//                System.out.println(patient.getPESEL());
                 session.save(patient);
             }catch (Exception ex){
                 ex.printStackTrace();
-//                System.err.println(ex);
             }
         }
-        session.beginTransaction();
-        session.getTransaction().commit();
 
         for(int i =0;i<10;i++){
             try{
                 Receptionist receptionist = GeneratorDanych.generatorReceptionist(new Random().nextBoolean());
+                list.add(receptionist);
+//                System.out.println(receptionist.getPESEL());
                 session.save(receptionist);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
         }
-        session.beginTransaction();
-        session.getTransaction().commit();
 
         for(int i =0;i<20;i++){
             try{
                 Nurse nurse = GeneratorDanych.generatorNurse(new Random().nextBoolean());
+                list.add(nurse);
+//                System.out.println(nurse.getPESEL());
                 session.save(nurse);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
         }
-        session.beginTransaction();
-        session.getTransaction().commit();
 
         for(int i =0;i<20;i++){
             try{
                 Doctor doctor = GeneratorDanych.generatorDoctor(new Random().nextBoolean());
+                list.add(doctor);
+//                System.out.println(doctor.getPESEL());
                 session.save(doctor);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
         }
-        session.beginTransaction();
-        session.getTransaction().commit();
 
         for(int i =0;i<10;i++){
             try{
                 Surgeon surgeon = GeneratorDanych.generatorSurgeon(new Random().nextBoolean());
+                list.add(surgeon);
+//                System.out.println(surgeon.getPESEL());
                 session.save(surgeon);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
         }
-        session.beginTransaction();
-        session.getTransaction().commit();
 
-        for(int i =0;i<2;i++){
+        for(int i =0;i<1;i++){
             try{
                 HospitalAdministrator hospitalAdministrator = GeneratorDanych.generatorAdmin(new Random().nextBoolean());
+                list.add(hospitalAdministrator);
+//                System.out.println(hospitalAdministrator.getPESEL());
                 session.save(hospitalAdministrator);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
         }
-        session.beginTransaction();
-        session.getTransaction().commit();
 
+//        session.beginTransaction();
+//        session.getTransaction().commit();
+        return list;
     }
 
     private static void print(Session session, String table){
         List<Person> list = session.createQuery("from "+table).list();
         for(Person person :list){
-            System.out.println(person);
+            System.out.println(person.getPESEL());
         }
     }
 
@@ -173,17 +176,24 @@ public class Main {
     }
 
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        try {
-//            create(session);
-            System.err.println("--------------------");
-//            print(session,"Person");
+        try (Session session = getSession()) {
+            var list = create(session);
+            for (Person p : list) {
+                System.out.println(p);
+            }
+            System.out.println("--------------------");
+
+//            for (Person p : list) {
+//                System.out.println(p.getPESEL());
+//            }
+//            print(session, "Person");
 //            print(session,"Worker");
+//            System.err.println("--------------------");
 //            System.out.println(GeneratorDanych.femalePESELid);
 //            System.out.println(GeneratorDanych.malePESELid);
-//            System.out.println(Person.getPESELs());
-            print(session);
-//
+            System.out.println("--------------------");
+//            print(session);
+
 
 //            List<Hospital> hospitalList = session.createQuery("from Hospital ").list();
 //            List<MedicalWorker> medicalWorkerList = session.createQuery("from MedicalWorker ").list();
@@ -197,19 +207,7 @@ public class Main {
 //            System.out.println(hospitalList.get(0));
 //            System.out.println(hospitalList.get(1));
 
-//
-//            System.out.println("querying all the managed entities...");
-//            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-//            for (EntityType<?> entityType : metamodel.getEntities()) {
-//                final String entityName = entityType.getName();
-//                final Query query = session.createQuery("from " + entityName);
-//                System.out.println("executing: " + query.getQueryString());
-//                for (Object o : query.list()) {
-//                    System.out.println("  " + o);
-//                }
-//            }
-        } finally {
-            session.close();
+
         }
     }
 }

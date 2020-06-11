@@ -5,15 +5,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "Person")
-//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"PESEL"}))
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@MappedSuperclass
-public abstract class Person {
+public class Person {
     private long id;
     private String name;
     private String surname;
@@ -24,7 +20,7 @@ public abstract class Person {
     private LocalDate birthDate;//zlozony
     private String mail;//opcjonalny
 
-    private static List<String> PESELs = new ArrayList<>();
+//    private static List<String> PESELs = new ArrayList<>();
 
     public Person(){}
     public Person(String name, String surname, String PESEL, Address address, String phoneNumber, String mail)throws Exception {
@@ -32,7 +28,7 @@ public abstract class Person {
         this.setSurname(surname);
         this.setPESEL(PESEL);
         this.setAddress(address);
-        this.birthDate = countDateOfBirth();
+        this.setBirthDate(countDateOfBirth(this.getPESEL()));
         this.setSex((Integer.parseInt(PESEL.substring(10,11)))%2 == 0);
         this.setPhoneNumber(phoneNumber);
         this.setMail(mail);
@@ -106,7 +102,7 @@ public abstract class Person {
     }
 
 
-    @Basic(optional = true)
+    @Basic
     public String getMail() { return mail; }
     public void setMail(String mail) { this.mail = mail; }
 
@@ -118,7 +114,7 @@ public abstract class Person {
         return period.getYears();
     }
 
-    private LocalDate countDateOfBirth() throws Exception{
+    private LocalDate countDateOfBirth(String PESEL) throws Exception{
         String year = PESEL.substring(0,2);
         String mounth = PESEL.substring(2,4);
         String day = PESEL.substring(4,6);
@@ -154,25 +150,23 @@ public abstract class Person {
         return LocalDate.of(y, m, d);
     }
 
-    protected boolean isUnique(List<String> strings,String string){
-        for(String s:strings){
-            if(s.equals(string)){
-                return false;
-            }
-        }
-        System.out.println("List:"+strings);
-        System.out.println("Element:"+string);
-        return true;
-    }
-
-//    delete later
-    public static List<String> getPESELs() {
-        return PESELs;
-    }
-
-    public static void setPESELs(List<String> PESELs) {
-        Person.PESELs = PESELs;
-    }
+    //    delete later
+//    protected boolean isUnique(List<String> strings,String string){
+//        for(String s:strings){
+//            if(s.equals(string)){
+//                return false;
+//            }
+//        }
+//        System.out.println("List:"+strings);
+//        System.out.println("Element:"+string);
+//        return true;
+//    }
+//    public static List<String> getPESELs() {
+//        return PESELs;
+//    }
+//    public static void setPESELs(List<String> PESELs) {
+//        Person.PESELs = PESELs;
+//    }
 
     @Override
     public String toString() {

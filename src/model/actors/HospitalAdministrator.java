@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity(name = "HospitalAdministrator")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class HospitalAdministrator extends Surgeon{
     private LocalDate dateOfTakingOffice;
 

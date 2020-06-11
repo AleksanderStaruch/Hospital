@@ -1,8 +1,6 @@
 package model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "MedicalWorker")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -22,6 +20,13 @@ public abstract class MedicalWorker extends Worker {
 //        medicalTreatmentList = new ArrayList<>();
     }
 
+    @Enumerated(value = EnumType.STRING)
+    public Degree getDegree(){ return degree; }
+    public void setDegree(Degree degree){
+        if(degree == null){throw new NullPointerException("Degree field cannot be empty.");}
+        this.degree = degree;
+    }
+
     protected abstract void performMedicalTreatment();
 
 //    public void addMedicalTreatment(MedicalTreatment treatment){
@@ -38,12 +43,6 @@ public abstract class MedicalWorker extends Worker {
 //        this.medicalTreatmentList = medicalTreatmentList;
 //    }
 
-    @Enumerated(value = EnumType.STRING)
-    public Degree getDegree(){ return degree; }
-    public void setDegree(Degree degree){
-        if(degree == null){throw new NullPointerException("Degree field cannot be empty.");}
-        this.degree = degree;
-    }
 
     @Override
     public String toString() {

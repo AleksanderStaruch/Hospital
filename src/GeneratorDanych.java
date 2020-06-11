@@ -55,7 +55,6 @@ public class GeneratorDanych {
         }
     }
 
-
     //        b=true ->male b=false -> female
     public static Patient generatorPatient(boolean b) throws Exception {
         long minDay = LocalDate.of(2010, 1, 1).toEpochDay();
@@ -84,14 +83,15 @@ public class GeneratorDanych {
 
         Patient patient = new Patient(name,surname,PESEL,generatorA(),phone,mail,randomDate);
         if(b){
+            //System.out.println("M:"+malePESELid + " PES: "+PESEL);;
             malePESELid++;
         }else{
+            //System.out.println("F:"+femalePESELid + " PES: "+PESEL);
             femalePESELid++;
         }
-        System.out.println(PESEL);
+//        System.out.println(PESEL);
         return patient;
     }
-
     public static Receptionist generatorReceptionist(boolean b) throws Exception {
         String name;
         String surname;
@@ -105,7 +105,7 @@ public class GeneratorDanych {
         List<String> languages;
         if(b){
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESELid));
+            PESEL = malePESEL.get(malePESELid);
             languages=List.of("polski","niemiecki","angieslki");
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
@@ -121,11 +121,13 @@ public class GeneratorDanych {
         education="";
         Receptionist receptionist = new Receptionist(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,languages);
         if(b){
+            //System.out.println("M:"+malePESELid + " PES: "+PESEL);;
             malePESELid++;
         }else{
+            //System.out.println("F:"+femalePESELid + " PES: "+PESEL);
             femalePESELid++;
         }
-        System.out.println(PESEL);
+//        System.out.println(PESEL);
         return receptionist;
     }
     public static Nurse generatorNurse(boolean b) throws Exception {
@@ -142,7 +144,7 @@ public class GeneratorDanych {
         MedicalWorker.Degree degree;
         if(b){
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESELid));
+            PESEL = malePESEL.get(malePESELid);
             certificates=List.of();
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
@@ -160,14 +162,15 @@ public class GeneratorDanych {
         
         Nurse nurse = new Nurse(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,certificates);
         if(b){
+            //System.out.println("M:"+malePESELid + " PES: "+PESEL);;
             malePESELid++;
         }else{
+            //System.out.println("F:"+femalePESELid + " PES: "+PESEL);
             femalePESELid++;
         }
-        System.out.println(PESEL);
+//        System.out.println(PESEL);
         return nurse;
     }
-
     public static Doctor generatorDoctor(boolean b) throws Exception {
         String name;
         String surname;
@@ -183,7 +186,7 @@ public class GeneratorDanych {
         if(b){
 
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESELid));
+            PESEL = malePESEL.get(malePESELid);
             specialization = "";
         }else{
             name=femaleName.get(randomizer(femaleName.size()));
@@ -200,11 +203,13 @@ public class GeneratorDanych {
         degree = MedicalWorker.Degree.DOCTOR_DEGREE;
         Doctor doctor = new Doctor(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization);
         if(b){
+            //System.out.println("M:"+malePESELid + " PES: "+PESEL);;
             malePESELid++;
         }else{
+            //System.out.println("F:"+femalePESELid + " PES: "+PESEL);
             femalePESELid++;
         }
-        System.out.println(PESEL);
+//        System.out.println(PESEL);
         return doctor;
     }
     public static Surgeon generatorSurgeon(boolean b) throws Exception {
@@ -223,7 +228,7 @@ public class GeneratorDanych {
         if(b){
 
             name=maleName.get(randomizer(maleName.size()));
-            PESEL = malePESEL.get(randomizer(malePESELid));
+            PESEL = malePESEL.get(malePESELid);
             type = Surgeon.Type.CARDIO;
             specialization = "";
         }else{
@@ -243,11 +248,13 @@ public class GeneratorDanych {
 
         Surgeon surgeon = new Surgeon(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization,type);
         if(b){
+            //System.out.println("M:"+malePESELid + " PES: "+PESEL);;
             malePESELid++;
         }else{
+            //System.out.println("F:"+femalePESELid + " PES: "+PESEL);
             femalePESELid++;
         }
-        System.out.println(PESEL);
+//        System.out.println(PESEL);
         return surgeon;
     }
     public static HospitalAdministrator generatorAdmin(boolean b) throws Exception {
@@ -285,15 +292,16 @@ public class GeneratorDanych {
 
         HospitalAdministrator hospitalAdministrator = new HospitalAdministrator(name,surname,PESEL,generatorA(),phone,mail,login.toLowerCase(),password,salary,education,degree,specialization,type,LocalDate.now());
         if(b){
+            //System.out.println("M:"+malePESELid + " PES: "+PESEL);;
             malePESELid++;
         }else{
+            //System.out.println("F:"+femalePESELid + " PES: "+PESEL);
             femalePESELid++;
         }
-        System.out.println(PESEL);
+//        System.out.println(PESEL);
         return hospitalAdministrator;
 
     }
-
 
     public static void main(String[] args) throws Exception {
         System.out.println(generatorPatient(true));

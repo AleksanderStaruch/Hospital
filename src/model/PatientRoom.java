@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity(name = "PatientRoom")
 public class PatientRoom {
@@ -21,16 +22,6 @@ public class PatientRoom {
         this.setPatient(patient);
         this.setFromm(fromm);
         this.setTo(to);
-
-
-        room.addStay(this);
-        patient.addStay(this);
-    }
-    public PatientRoom(Room room, Patient patient) throws Exception {
-        this.setRoom(room);
-        this.setPatient(patient);
-        this.setFromm(LocalDate.now());
-        this.setTo(null);
 
 
         room.addStay(this);
@@ -64,7 +55,7 @@ public class PatientRoom {
         this.fromm = fromm;
     }
 
-    @Basic(optional = true)
+    @Basic()
     public LocalDate getTo() { return to; }
     public void setTo(LocalDate to) { this.to = to; }
 
@@ -79,7 +70,7 @@ public class PatientRoom {
                 "room={" + room +
                 "}, patient={" + patient +
                 "}, from=" + fromm +
-                ", to=" + to +
+                ", to=" + Objects.requireNonNullElse(to, "no data") +
                 '}';
     }
 }

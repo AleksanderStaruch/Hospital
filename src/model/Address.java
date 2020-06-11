@@ -3,6 +3,7 @@ package model;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -32,28 +33,28 @@ public class Address implements Serializable {
         this.setNumberOfLocal(null);
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getCity() { return city; }
     public void setCity(String city) {
         if(city == null){throw new NullPointerException("City field cannot be empty.");}
         this.city = city;
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getCodePostal() { return codePostal; }
     public void setCodePostal(String codePostal) {
         if(codePostal == null){throw new NullPointerException("Code postal field cannot be empty.");}
         this.codePostal = codePostal;
     }
 
-    @Basic
+    @Basic(optional = false)
     public String getStreet() { return street; }
     public void setStreet(String street) {
         if(street == null){throw new NullPointerException("Street field cannot be empty.");}
         this.street = street;
     }
 
-    @Basic
+    @Basic(optional = false)
     public Integer getNumber() { return number; }
     public void setNumber(Integer number) {
         if(number == null){throw new NullPointerException("Number field cannot be empty.");}
@@ -61,7 +62,7 @@ public class Address implements Serializable {
     }
 
 
-    @Column(nullable = true)
+    @Basic
     public Integer getNumberOfLocal() {
         return numberOfLocal;
     }
