@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "MedicalWorker")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -9,15 +11,14 @@ public abstract class MedicalWorker extends Worker {
 
     private Degree degree;
 
-//    private List<MedicalTreatment> medicalTreatmentList;
+    private List<MedicalWorkerTreatment> medicalWorkerTreatments;
 
     public MedicalWorker(){}
-
     public MedicalWorker(String name, String surname, String PESEL, Address address, String phoneNumber, String mail, String login, String password, Double salary, String education, Degree degree) throws Exception {
         super(name, surname, PESEL, address, phoneNumber, mail, login, password, salary, education);
         this.setDegree(degree);
 
-//        medicalTreatmentList = new ArrayList<>();
+        medicalWorkerTreatments = new ArrayList<>();
     }
 
     @Enumerated(value = EnumType.STRING)
@@ -29,20 +30,9 @@ public abstract class MedicalWorker extends Worker {
 
     protected abstract void performMedicalTreatment();
 
-//    public void addMedicalTreatment(MedicalTreatment treatment){
-//        medicalTreatmentList.add(treatment);
-//    }
-
-//    TODO tabela posrednia
-//    @ManyToMany
-//    public List<MedicalTreatment> getMedicalTreatmentList() {
-//        return medicalTreatmentList;
-//    }
-//
-//    public void setMedicalTreatmentList(List<MedicalTreatment> medicalTreatmentList) {
-//        this.medicalTreatmentList = medicalTreatmentList;
-//    }
-
+    @OneToMany(mappedBy = "medicalWorker",cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<MedicalWorkerTreatment> getMedicalWorkerTreatments() { return medicalWorkerTreatments; }
+    public void setMedicalWorkerTreatments(List<MedicalWorkerTreatment> medicalWorkerTreatments) { this.medicalWorkerTreatments = medicalWorkerTreatments; }
 
     @Override
     public String toString() {

@@ -79,6 +79,11 @@ public abstract class MedicalTreatment {
     public Patient getPatient() { return patient; }
     public void setPatient(Patient patient) { this.patient = patient; }
 
+    @OneToMany(mappedBy = "medicalTreatment",cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<MedicalWorkerTreatment> getMedicalWorkerTreatments() { return medicalWorkerTreatments; }
+    public void setMedicalWorkerTreatments(List<MedicalWorkerTreatment> medicalWorkerTreatments) { this.medicalWorkerTreatments = medicalWorkerTreatments; }
+
+
     @Override
     public String toString() {
         return "MedicalTreatment{" +

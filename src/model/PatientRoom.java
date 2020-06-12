@@ -67,10 +67,11 @@ public class PatientRoom {
     @Override
     public String toString() {
         return "PatientRoom{" +
-                "room={" + room +
-                "}, patient={" + patient +
-                "}, from=" + fromm +
-                ", to=" + Objects.requireNonNullElse(to, "no data") +
+                "id=" + id +
+                ", room=" + room +
+                ", patient=" + patient +
+                ", fromm=" + fromm +
+                ", to=" + to +
                 '}';
     }
 }

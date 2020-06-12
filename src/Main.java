@@ -27,34 +27,6 @@ public class Main {
     }
 
     private static List<Person> create(Session session) throws Exception {
-
-        Hospital hospital;
-
-        Department department1;
-        Department department2;
-        Department department3;
-
-        Department department4;
-        Department department5;
-        Department department6;
-
-        Room room1;
-        Room room2;
-        Room room3;
-        Room room4;
-        Room room5;
-        Room room6;
-        Room room7;
-        Room room8;
-
-        Room room9;
-        Room room10;
-        Room room11;
-        Room room12;
-        Room room13;
-        Room room14;
-        Room room15;
-        Room room16;
         List<Person> list = new ArrayList<>();
 
         for(int i =0;i<50;i++){
@@ -123,8 +95,49 @@ public class Main {
             }
         }
 
-//        session.beginTransaction();
-//        session.getTransaction().commit();
+        Hospital hospital;
+
+        Department department1;
+        Department department2;
+        Department department3;
+
+        Department department4;
+        Department department5;
+        Department department6;
+
+        Room room1;
+        Room room2;
+        Room room3;
+        Room room4;
+        Room room5;
+        Room room6;
+        Room room7;
+        Room room8;
+
+        Room room9;
+        Room room10;
+        Room room11;
+        Room room12;
+        Room room13;
+        Room room14;
+        Room room15;
+        Room room16;
+
+        PatientRoom patientRoom1;
+        PatientRoom patientRoom2;
+        PatientRoom patientRoom3;
+        PatientRoom patientRoom4;
+        PatientRoom patientRoom5;
+        PatientRoom patientRoom6;
+        PatientRoom patientRoom7;
+        PatientRoom patientRoom8;
+        PatientRoom patientRoom9;
+        PatientRoom patientRoom10;
+        PatientRoom patientRoom11;
+
+
+        session.beginTransaction();
+        session.getTransaction().commit();
         return list;
     }
 
@@ -177,22 +190,10 @@ public class Main {
 
     public static void main(final String[] args) throws Exception {
         try (Session session = getSession()) {
-            var list = create(session);
-            for (Person p : list) {
-                System.out.println(p);
-            }
-            System.out.println("--------------------");
-
-//            for (Person p : list) {
-//                System.out.println(p.getPESEL());
-//            }
+            create(session);
 //            print(session, "Person");
-//            print(session,"Worker");
-//            System.err.println("--------------------");
-//            System.out.println(GeneratorDanych.femalePESELid);
-//            System.out.println(GeneratorDanych.malePESELid);
             System.out.println("--------------------");
-//            print(session);
+            print(session);
 
 
 //            List<Hospital> hospitalList = session.createQuery("from Hospital ").list();

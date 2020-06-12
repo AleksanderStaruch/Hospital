@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "Person")
@@ -20,7 +22,7 @@ public class Person {
     private LocalDate birthDate;//zlozony
     private String mail;//opcjonalny
 
-//    private static List<String> PESELs = new ArrayList<>();
+    private static List<String> PESELs = new ArrayList<>();
 
     public Person(){}
     public Person(String name, String surname, String PESEL, Address address, String phoneNumber, String mail)throws Exception {

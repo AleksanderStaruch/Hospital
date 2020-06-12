@@ -21,16 +21,11 @@ public class Patient extends Person {
     public Patient() {}
     public Patient(String name, String surname, String PESEL, Address address, String phoneNumber, String mail, LocalDate registrationDate) throws Exception {
         super(name, surname, PESEL, address, phoneNumber, mail);
-//        TODO birthday > registrationDate
         this.setRegistrationDate(registrationDate);
         patientRooms = new ArrayList<>();
     }
 
-    /**
-     * dont make another stay when patient doesnt finished last one
-     * @param stay
-     * @throws Exception
-     */
+
     public void addStay(PatientRoom stay) throws Exception {
         try {
             PatientRoom lastStay = patientRooms.get(patientRooms.size() - 1);
@@ -48,7 +43,8 @@ public class Patient extends Person {
     @Basic(optional = false)
     public LocalDate getRegistrationDate() { return registrationDate; }
     public void setRegistrationDate(LocalDate registrationDate) {
-        if(registrationDate == null){throw new NullPointerException("Password field cannot be empty.");}
+        if(registrationDate == null){throw new NullPointerException("Registration date field cannot be empty.");}
+        if(registrationDate.isBefore(this.getBirthDate())){throw new NullPointerException("Registration date is before patient birth date.");}
         this.registrationDate = registrationDate;
     }
 
