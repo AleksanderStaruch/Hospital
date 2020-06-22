@@ -75,6 +75,11 @@ public abstract class Worker extends Person {
 //    TODO query to set list every time program starts
     public static void setLogins(List<String> logins) { Worker.logins = logins; }
 
+//    TODO implemet calculateIncome
+    public double calculateIncome(){
+        return 0.0;
+    }
+
     @Override
     public String toString() {
         return super.toString() +

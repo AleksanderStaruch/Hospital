@@ -190,7 +190,7 @@ public class Main {
 
     public static void main(final String[] args) throws Exception {
         try (Session session = getSession()) {
-            create(session);
+//            create(session);
 //            print(session, "Person");
             System.out.println("--------------------");
             print(session);

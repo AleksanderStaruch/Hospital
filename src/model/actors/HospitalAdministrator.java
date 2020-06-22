@@ -44,9 +44,11 @@ public class HospitalAdministrator extends Surgeon{
                 ", PESEL='" + this.getPESEL() + '\'' +
                 ", address=" + this.getAddress() +
                 ", phoneNumber='" + this.getPhoneNumber() + '\'' +
-                ", sex=" + (this.getSex()? "male": "female") +
+                ", sex=" + this.getSex() +
                 ", birthDate=" + this.getBirthDate() +
                 ", mail='" + this.getMail() + '\''+
+                ", login='" + this.getLogin() + '\'' +
+                ", password='" + this.getPassword() + '\'' +
                 ", salary=" + this.getSalary() +
                 ", education='" + this.getEducation() + '\''+
                 ", degree=" + this.getDegree() +

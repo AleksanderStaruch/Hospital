@@ -15,9 +15,10 @@ public class Room implements Serializable {
     private static Set<Integer> roomsNumbers = new HashSet<>();
 
     private long id;
-    private Department department;
     private Integer roomNumber;
     private Integer bedsCount;
+
+    private Department department;
 
     private List<PatientRoom> patientRooms;
 

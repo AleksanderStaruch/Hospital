@@ -12,13 +12,15 @@ import java.util.Objects;
 @Entity(name = "Person")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
+    public enum Sex{MALE,FEMALE}
+
     private long id;
     private String name;
     private String surname;
     private String PESEL;//unikalny
     private Address address;//zlozony
     private String phoneNumber;
-    private boolean sex;//male=true,female=false
+    private Sex sex;//male=true,female=false
     private LocalDate birthDate;//zlozony
     private String mail;//opcjonalny
 
@@ -31,7 +33,6 @@ public class Person {
         this.setPESEL(PESEL);
         this.setAddress(address);
         this.setBirthDate(countDateOfBirth(this.getPESEL()));
-        this.setSex((Integer.parseInt(PESEL.substring(10,11)))%2 == 0);
         this.setPhoneNumber(phoneNumber);
         this.setMail(mail);
     }
@@ -73,7 +74,12 @@ public class Person {
 //        if(PESELs.contains(PESEL)){throw new Exception("There is someone with this PESEL ("+PESEL+" "+name+" "+surname+").");}
 //        PESELs.add(PESEL);
         this.PESEL = PESEL;
-        sex = ((Integer.parseInt(PESEL.substring(9,10)))%2 == 0);
+        if((Integer.parseInt(PESEL.substring(9,10)))%2 == 0){
+            this.setSex(Sex.MALE);
+        }else{
+            this.setSex(Sex.FEMALE);
+        }
+
     }
 
     @Embedded
@@ -92,9 +98,9 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    @Basic(optional = false)
-    public boolean getSex() { return sex; }
-    public void setSex(boolean sex) { this.sex = sex; }
+    @Enumerated
+    public Sex getSex() { return sex; }
+    public void setSex(Sex sex) { this.sex = sex; }
 
     @Basic(optional = false)
     public LocalDate getBirthDate() { return birthDate; }
@@ -102,7 +108,6 @@ public class Person {
         if(birthDate == null){throw new NullPointerException("Birth date field cannot be empty.");}
         this.birthDate = birthDate;
     }
-
 
     @Basic
     public String getMail() { return mail; }
@@ -178,7 +183,7 @@ public class Person {
                 ", PESEL='" + PESEL + '\'' +
                 ", address=" + address +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", sex=" + (sex? "male": "female") +
+                ", sex=" + sex +
                 ", birthDate=" + birthDate +
                 ", mail='" + Objects.requireNonNullElse(mail, "no data") + '\'';
     }

@@ -9,11 +9,13 @@ import java.util.Set;
 
 @Entity(name="Department")
 public class Department {
-    public enum Type{GENERAL_SURGERY, INTENSIVE_CARE,CARDIOLOGY,PSYCHIATRIC}
+    public enum Type{GENERAL_SURGERY, INTENSIVE_CARE,CARDIOLOGY,PSYCHIATRIC,PEDIATRIC}
+
     private long id;
-    private Hospital hospital;
     private Type type;
     private Integer floorNumber;
+
+    private Hospital hospital;
 
     private Set<Room> rooms;
     private static HashSet<Room> allRooms = new HashSet<>();

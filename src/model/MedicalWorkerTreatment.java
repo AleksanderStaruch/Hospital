@@ -17,7 +17,7 @@ public class MedicalWorkerTreatment {
     public MedicalWorkerTreatment(MedicalWorker medicalWorker, MedicalTreatment medicalTreatment, LocalDate fromm, LocalDate to) {
         this.setMedicalWorker(medicalWorker);
         this.setMedicalTreatment(medicalTreatment);
-        this.setFrom(fromm);
+        this.setFromm(fromm);
         this.setTo(to);
     }
 
@@ -42,8 +42,8 @@ public class MedicalWorkerTreatment {
     }
 
     @Basic(optional = false)
-    public LocalDate getFrom() { return fromm; }
-    public void setFrom(LocalDate fromm) {
+    public LocalDate getFromm() { return fromm; }
+    public void setFromm(LocalDate fromm) {
         if(fromm == null){throw new NullPointerException("From field cannot be empty.");}
         this.fromm = fromm;
     }
