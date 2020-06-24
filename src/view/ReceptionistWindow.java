@@ -2,6 +2,7 @@ package view;
 
 import model.Worker;
 import model.actors.Patient;
+import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
 import viewElements.InfoDialog;
 import viewElements.WorkerWindow;
@@ -15,8 +16,8 @@ public class ReceptionistWindow extends WorkerWindow {
 
     JLabel tittle;
     JPanel panel, dataPanel;
-    public ReceptionistWindow(JFrame frame, Worker worker) {
-        super(frame,worker);
+    public ReceptionistWindow(JFrame frame, Worker worker, Session session) {
+        super(frame,worker,session);
         this.frame = frame;
         this.worker = worker;
         setMenu();

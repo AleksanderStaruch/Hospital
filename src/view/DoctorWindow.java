@@ -3,6 +3,7 @@ package view;
 import model.Worker;
 import model.actors.Doctor;
 import model.actors.Patient;
+import org.hibernate.Session;
 import view.discharge.PatientListWindow;
 import viewElements.InfoDialog;
 import viewElements.WorkerWindow;
@@ -17,8 +18,9 @@ public class DoctorWindow extends WorkerWindow {
     JLabel tittle;
     JPanel panel, dataPanel;
     Worker worker;
-    public DoctorWindow(JFrame frame, Worker worker) {
-        super(frame,worker);
+
+    public DoctorWindow(JFrame frame, Worker worker, Session session) {
+        super(frame,worker,session);
         this.frame = frame;
         this.worker = worker;
         dataPanel = new JPanel();
@@ -90,10 +92,9 @@ public class DoctorWindow extends WorkerWindow {
         JMenuItem writeDischargeFromHospital = new JMenuItem("Write discharge from hospital");fun.add(writeDischargeFromHospital);
         writeDischargeFromHospital.addActionListener(l->{
             List<Patient> list;
-            try(var session = MainWindow.getSession()){
-                list = session.createQuery("from Patient ").list();
-            }
-            PatientListWindow patientListWindow = new PatientListWindow(frame, list,(Doctor) worker);
+            list = this.getSession().createQuery("from Patient ").list();
+
+            PatientListWindow patientListWindow = new PatientListWindow(frame, list,(Doctor) worker,this.getSession());
             frame.setContentPane(patientListWindow);
             SwingUtilities.updateComponentTreeUI(frame);
 

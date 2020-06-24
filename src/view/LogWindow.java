@@ -1,6 +1,7 @@
 package view;
 
 import model.Worker;
+import org.hibernate.Session;
 import viewElements.WorkerWindow;
 
 import javax.swing.*;
@@ -16,8 +17,11 @@ public class LogWindow extends JPanel {
     JPasswordField password_text;
     JButton submit, cancel;
     JPanel dataPanel, panel;
-    public LogWindow(JFrame frame) {
+
+    Session session;
+    public LogWindow(JFrame frame, Session session) {
         this.frame = frame;
+        this.session = session;
 
         // Login
         login_label = new JLabel("Login :");
@@ -54,7 +58,6 @@ public class LogWindow extends JPanel {
 
 
     private void actionPerformed(ActionEvent l) {
-        var session = MainWindow.getSession();
         System.out.println(login_text.getText() + " " + String.valueOf(password_text.getPassword()));
         List<Worker> list = session.createQuery("from Worker").list();
         Worker woker = null;
@@ -71,17 +74,16 @@ public class LogWindow extends JPanel {
             message.setForeground(Color.GREEN);
             String worekrType = woker.getClass().toString().split("\\.")[2];
             switch(worekrType){
-                case "Nurse" -> frame.setContentPane(new NurseWindow(frame,woker));
-                case "Receptionist" -> frame.setContentPane(new ReceptionistWindow(frame,woker));
-                case "Doctor" -> frame.setContentPane(new DoctorWindow(frame,woker));
-                case "Surgeon" -> frame.setContentPane(new SurgeonWindow(frame,woker));
-                case "HospitalAdministrator" -> frame.setContentPane(new HospitalAdministratorWindow(frame,woker));
+                case "Nurse" -> frame.setContentPane(new NurseWindow(frame,woker,session));
+                case "Receptionist" -> frame.setContentPane(new ReceptionistWindow(frame,woker,session));
+                case "Doctor" -> frame.setContentPane(new DoctorWindow(frame,woker,session));
+                case "Surgeon" -> frame.setContentPane(new SurgeonWindow(frame,woker,session));
+                case "HospitalAdministrator" -> frame.setContentPane(new HospitalAdministratorWindow(frame,woker,session));
             }
             SwingUtilities.updateComponentTreeUI(frame);
         } else {
             message.setText("Wrong password or login!");
             message.setForeground(Color.RED);
         }
-        session.close();
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity(name = "Document")
 public class Document {
-    enum Type{DISCHARGE,PRESCRIPTION,DEATHCERTIFICATE}
+    public enum Type{DISCHARGE,PRESCRIPTION,DEATHCERTIFICATE}
 
     private long id;
     private LocalDate date;
@@ -59,4 +59,16 @@ public class Document {
     @ManyToOne
     public Patient getPatient() { return patient; }
     public void setPatient(Patient patient) { this.patient = patient; }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", date=" + date +
+                ", description='" + description + '\'' +
+                ", type=" + type +
+                ", doctor=" + doctor +
+                ", patient=" + patient +
+                '}';
+    }
 }

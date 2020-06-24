@@ -34,6 +34,7 @@ public class MainWindow {
     }
 
     protected void createGUI() {
+        var session = getSession();
 
         JFrame jf = new JFrame();
         jf.setTitle("Hospital app");
@@ -41,13 +42,14 @@ public class MainWindow {
         jf.setLocation(380,0);
 //        jf.setResizable(false);
 
-        LogWindow panel = new LogWindow(jf);
+        LogWindow panel = new LogWindow(jf, session);
 
         jf.setJMenuBar(new JMenuBar());
         jf.getContentPane().add(panel);
         jf.setPreferredSize(new Dimension(980, 730));
         jf.pack();
         jf.setVisible(true);
+//        jf.setResizable(false);
     }
 }
 

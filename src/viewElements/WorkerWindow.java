@@ -1,6 +1,7 @@
 package viewElements;
 
 import model.Worker;
+import org.hibernate.Session;
 import view.LogWindow;
 import view.MainWindow;
 
@@ -15,10 +16,12 @@ public class WorkerWindow extends JPanel {
 
     JFrame frame;
     Worker worker;
+    Session session;
 
-    public WorkerWindow(JFrame frame, Worker worker) {
+    public WorkerWindow(JFrame frame, Worker worker, Session session) {
         this.frame = frame;
         this.worker = worker;
+        this.session = session;
         menuBar = new JMenuBar();
 
         profile = new JMenu("Profile");
@@ -29,7 +32,6 @@ public class WorkerWindow extends JPanel {
             if(dialog.isSucceeded()){
                 try {
                     worker.setPassword(dialog.getPassword());
-                    var session = MainWindow.getSession();
                     session.update(worker);
                     session.beginTransaction();
                     session.getTransaction().commit();
@@ -46,7 +48,7 @@ public class WorkerWindow extends JPanel {
         logout = new JMenuItem("Logout");profile.add(logout);
         logout.addActionListener(l->{
             frame.setJMenuBar(new JMenuBar());
-            frame.setContentPane(new LogWindow(frame));
+            frame.setContentPane(new LogWindow(frame,session));
             SwingUtilities.updateComponentTreeUI(frame);
         });
 
@@ -62,6 +64,9 @@ public class WorkerWindow extends JPanel {
         frame.setJMenuBar(menuBar);
     }
 
+    public Session getSession() {
+        return session;
+    }
 
     public JMenuBar getMenuBar() {
         return menuBar;

@@ -144,6 +144,25 @@ public class Main {
             PatientRoom patientRoom10 = new PatientRoom(room2, list1.get(5), LocalDate.of(2019, 7, 20), null);
             PatientRoom patientRoom11 = new PatientRoom(room2, list1.get(6), LocalDate.of(2019, 8, 20), null);
 
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia1 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia2 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia3 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia4 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia5 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia6 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia7 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia8 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia9 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia10 = new MedicalTreatmentLocalAnesthesia();
+
+            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia1 = new MedicalTreatmentGeneralAnesthesia();
+            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia2 = new MedicalTreatmentGeneralAnesthesia();
+            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia3 = new MedicalTreatmentGeneralAnesthesia();
+            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia4 = new MedicalTreatmentGeneralAnesthesia();
+
+
+
+
             session.save(hospital);
             session.save(department1);
             session.save(department2);

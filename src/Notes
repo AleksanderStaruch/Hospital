@@ -95,3 +95,34 @@ public class Hospital {
     private void setId(long id) {
         this.id = id;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    doctorPanel = new JPanel(new GridLayout(2,2));
+    patientPanel = new JPanel(new GridLayout(2,2));
+    dateCityPanel = new JPanel(new GridLayout(2,2));
+
+    doctorPanel.add(doctorName);doctorPanel.add(doctorNameFiled);
+    doctorPanel.add(doctorSurname);doctorPanel.add(doctorSurnameFiled);
+
+    patientPanel.add(patientName);patientPanel.add(patientNameFiled);
+    patientPanel.add(patientSurname);patientPanel.add(patientSurnameFiled);
+
+    dateCityPanel.add(date);dateCityPanel.add(dateFiled);
+    dateCityPanel.add(city);dateCityPanel.add(cityFiled);
+
+    dataPanel = new JPanel(new GridLayout(1,3,5,15));
+    dataPanel.add(patientPanel);dataPanel.add(doctorPanel);dataPanel.add(dateCityPanel);
+
+    description = new JTextArea(document.getDescription());
+    description.setEditable(false);
+    JScrollPane scroller = new JScrollPane(description);

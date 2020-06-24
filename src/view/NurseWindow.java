@@ -2,6 +2,7 @@ package view;
 
 import model.MedicalTreatment;
 import model.Worker;
+import org.hibernate.Session;
 import viewElements.InfoDialog;
 import viewElements.WorkerWindow;
 
@@ -14,8 +15,8 @@ public class NurseWindow extends WorkerWindow {
     JLabel tittle;
     JPanel panel, dataPanel;
     Worker worker;
-    public NurseWindow(JFrame frame, Worker worker) {
-        super(frame,worker);
+    public NurseWindow(JFrame frame, Worker worker, Session session) {
+        super(frame,worker,session);
         this.frame = frame;
         this.worker = worker;
         setMenu();

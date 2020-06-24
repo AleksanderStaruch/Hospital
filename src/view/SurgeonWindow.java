@@ -1,6 +1,7 @@
 package view;
 
 import model.Worker;
+import org.hibernate.Session;
 import viewElements.InfoDialog;
 import viewElements.WorkerWindow;
 
@@ -13,8 +14,8 @@ public class SurgeonWindow extends WorkerWindow {
     JLabel tittle;
     JPanel panel, dataPanel;
     Worker worker;
-    public SurgeonWindow(JFrame frame, Worker worker) {
-        super(frame,worker);
+    public SurgeonWindow(JFrame frame, Worker worker, Session session) {
+        super(frame,worker,session);
         this.frame = frame;
         this.worker = worker;
         dataPanel = new JPanel();

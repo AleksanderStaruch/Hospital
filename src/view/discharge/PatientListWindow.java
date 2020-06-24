@@ -5,6 +5,7 @@ import model.PatientRoom;
 import model.actors.Doctor;
 import model.actors.Patient;
 import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import view.MainWindow;
 import viewElements.InfoDialog;
 
@@ -27,7 +28,7 @@ public class PatientListWindow extends JPanel {
 
     private boolean succeeded;
 
-    public PatientListWindow(JFrame frame, List<Patient> patientList, Doctor doctor) {
+    public PatientListWindow(JFrame frame, List<Patient> patientList, Doctor doctor, Session session) {
 
         infoPanel = new JPanel(new BorderLayout());
         tittle = new JLabel("Discharge window:");infoPanel.add(tittle,BorderLayout.PAGE_START);
@@ -39,70 +40,76 @@ public class PatientListWindow extends JPanel {
         list = new JList<>(patientList.toArray());
         list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
-//        list.setVisibleRowCount(20);
         list.setSelectedIndex(0);
         list.setFont(new Font("Serif",Font.BOLD,16));
         list.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
 
+//        renderer
+
         buttonPanel = new JPanel();
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 5));
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
         submit = new JButton("SUBMIT");buttonPanel.add(submit);
-//        buttonPanel.add(Box.createHorizontalGlue());
+        frame.getRootPane().setDefaultButton(submit);
         cancel = new JButton("CANCEL");buttonPanel.add(cancel);
 
         submit.addActionListener(l->{
             List<Patient> patients;
-            List<PatientRoom> patientRoomList;
-            Patient patientSelected ;
+            Patient patientSelected;
             Patient patient;
-            PatientRoom patientRooms;
-            try(var session = MainWindow.getSession()) {
-                patients = session.createQuery("from Patient ").list();
-                session.createQuery("from Department ").list();
-                session.createQuery("from Room ").list();
-                patientRoomList = session.createQuery("from PatientRoom ").list();
 
-                patientSelected = patientList.get(list.getSelectedIndex());
-                patient = patients.stream().filter(p -> p.getId() == patientSelected.getId()).collect(Collectors.toList()).get(0);
-                patientRooms = patientRoomList.stream().filter(p -> p.getPatient().getId() == patientSelected.getId()).collect(Collectors.toList()).get(0);
-            }
-            System.out.println(patient);
-            System.out.println(patientRooms);
-            System.out.println(patient.getPatientRooms());
-            var from = patient.lastPatientRooms().getFromm();
-            if(patient.lastPatientRooms() != null){
-                var infoDialog = new InfoDialog("Patient is already discharged.");
-                infoDialog.setVisible(true);
-            }else{
-                var treatments = patientSelected.getMedicalTreatments().stream()
-                        .filter(p->p.getMedicalWorkerTreatments().get(0).getFromm().toLocalDate().isAfter(from))
-                        .collect(Collectors.toList());
+            patients = session.createQuery("from Patient ").list();
+            session.createQuery("from Department ").list();
+            session.createQuery("from Room ").list();
+            session.createQuery("from PatientRoom ").list();
 
-                boolean isHealthy = true;
-                for(MedicalTreatment t:treatments){
-                    int days=0;
-                    switch (t.getType()){
-                        case NORMAL->days = TypeDays[0];
-                        case MINIMALLY_INVASIVE-> days = TypeDays[1];
-                        case INVASIVE-> days = TypeDays[2];
-                        case DANGEROUS-> days = TypeDays[3];
-                    }
-                    var date = t.getMedicalWorkerTreatments().get(0).getFromm().toLocalDate();
-                    long countDays = DAYS.between(date, LocalDate.now());
-                    if(days>countDays){
-                        isHealthy = false;
-                        break;
-                    }
-                }
-                if(isHealthy){
-                    PatientInfoWindow window = new PatientInfoWindow(frame,patientSelected, doctor);
-                    frame.setContentPane(window);
-                }else{
-                    var infoDialog = new InfoDialog("Patient is not ready to be discharged.");
+            patientSelected = patientList.get(list.getSelectedIndex());
+            patient = patients.stream().filter(p -> p.getId() == patientSelected.getId()).collect(Collectors.toList()).get(0);
+
+//            System.out.println(patient);
+//            System.out.println(patient.lastPatientRooms());
+//            System.out.println(patientRooms);
+//            System.out.println(patient.getPatientRooms());
+            try{
+                var from = patient.lastPatientRooms().getFromm();
+                if(patient.lastPatientRooms().getTo() != null){
+                    var infoDialog = new InfoDialog("Patient is already discharged.");
                     infoDialog.setVisible(true);
+                }else{
+                    var treatments = patientSelected.getMedicalTreatments().stream()
+                            .filter(p->p.getMedicalWorkerTreatments().get(0).getFromm().toLocalDate().isAfter(from))
+                            .collect(Collectors.toList());
+
+                    boolean isHealthy = true;
+                    for(MedicalTreatment t:treatments){
+                        int days=0;
+                        switch (t.getType()){
+                            case NORMAL->days = TypeDays[0];
+                            case MINIMALLY_INVASIVE-> days = TypeDays[1];
+                            case INVASIVE-> days = TypeDays[2];
+                            case DANGEROUS-> days = TypeDays[3];
+                        }
+                        var date = t.getMedicalWorkerTreatments().get(0).getFromm().toLocalDate();
+                        long countDays = DAYS.between(date, LocalDate.now());
+                        if(days>countDays){
+                            isHealthy = false;
+                            break;
+                        }
+                    }
+                    if(isHealthy){
+                        PatientInfoWindow window = new PatientInfoWindow(frame,patientSelected, doctor, session);
+                        frame.setContentPane(window);
+                    }else{
+                        var infoDialog = new InfoDialog("Patient is not ready to be discharged.");
+                        infoDialog.setVisible(true);
+                    }
+                    SwingUtilities.updateComponentTreeUI(frame);
                 }
-                SwingUtilities.updateComponentTreeUI(frame);
+            }catch (NullPointerException ex){
+                var infoDialog = new InfoDialog("This patient has not any stays in this hospital.");
+                infoDialog.setVisible(true);
             }
+
         });
 
         cancel.addActionListener(l->{
@@ -110,10 +117,11 @@ public class PatientListWindow extends JPanel {
             SwingUtilities.updateComponentTreeUI(frame);
         });
 
-        this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createEmptyBorder(10,10, 10, 10));
+        this.setLayout(new BorderLayout(10,10));
+        this.setBorder(BorderFactory.createEmptyBorder(5, 25, 10, 25));
         this.add(infoPanel, BorderLayout.PAGE_START);
-        this.add(new JScrollPane(list), BorderLayout.CENTER);
+        JScrollPane listScroller = new JScrollPane(list);
+        this.add(listScroller, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.PAGE_END);
     }
 }

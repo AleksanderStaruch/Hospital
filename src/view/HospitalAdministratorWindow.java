@@ -1,17 +1,20 @@
 package view;
 
 import model.Worker;
+import org.hibernate.Session;
+import viewElements.WorkerWindow;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class HospitalAdministratorWindow extends JPanel {
+public class HospitalAdministratorWindow extends WorkerWindow {
 
     JFrame frame;
     JLabel tittle;
     JPanel panel, dataPanel;
     Worker worker;
-    public HospitalAdministratorWindow(JFrame frame, Worker worker) {
+    public HospitalAdministratorWindow(JFrame frame, Worker worker, Session session) {
+        super(frame,worker,session);
         this.frame = frame;
         this.worker = worker;
         dataPanel = new JPanel();
