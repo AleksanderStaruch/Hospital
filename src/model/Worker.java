@@ -1,10 +1,11 @@
 package model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity(name = "Worker")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

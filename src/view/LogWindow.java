@@ -31,7 +31,7 @@ public class LogWindow extends JPanel {
         frame.getRootPane().setDefaultButton(submit);
         cancel = new JButton("CANCEL");
 
-        dataPanel = new JPanel(new GridLayout(5, 2));
+        dataPanel = new JPanel(new GridLayout(5, 2,5,5));
         dataPanel.add(login_label);dataPanel.add(login_text);
         dataPanel.add(password_label);dataPanel.add(password_text);
         dataPanel.add(submit);dataPanel.add(cancel);

@@ -26,6 +26,8 @@
         <mapping class="model.Worker"/>
         <mapping class="model.PatientRoom"/>
         <mapping class="model.MedicalTreatment"/>
+        <mapping class="model.MedicalTreatmentGeneralAnesthesia"/>
+        <mapping class="model.MedicalTreatmentLocalAnesthesia"/>
         <mapping class="model.MedicalWorkerTreatment"/>
         <mapping class="model.building.Hospital"/>
         <mapping class="model.building.Department"/>
@@ -36,6 +38,8 @@
         <mapping class="model.actors.Doctor"/>
         <mapping class="model.actors.Surgeon"/>
         <mapping class="model.actors.HospitalAdministrator"/>
+        <mapping class="model.Document"/>
+
 
     </session-factory>
 </hibernate-configuration>

@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Entity(name = "Person")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Person {
+public abstract class Person {
     public enum Sex{MALE,FEMALE}
 
     private long id;

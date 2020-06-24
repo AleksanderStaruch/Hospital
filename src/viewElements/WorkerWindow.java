@@ -52,7 +52,7 @@ public class WorkerWindow extends JPanel {
 
         function = new JMenu("Functions");
 
-        name = new JMenu("Logged as:"+worker.getName()+" "+worker.getSurname()+"("+worker.getClass().toString().split("\\.")[2]+")");
+        name = new JMenu("Logged as:"+worker.getName()+" "+worker.getSurname()+" ("+worker.getClass().toString().split("\\.")[2]+")");
         name.setEnabled(false);
 
         menuBar.add(profile);

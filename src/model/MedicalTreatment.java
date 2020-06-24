@@ -11,6 +11,7 @@ import java.util.*;
 public abstract class MedicalTreatment {
     public enum State{PLANNED,DURING,EXECUTED,CANCELLED}
     public enum Type{NORMAL,MINIMALLY_INVASIVE,INVASIVE,DANGEROUS}
+    public static int[] TypeDays = {0,2,5,14};
 
     private long id;
     private String name;
@@ -24,11 +25,11 @@ public abstract class MedicalTreatment {
     private List<MedicalWorkerTreatment> medicalWorkerTreatments;
 
     public MedicalTreatment(){}
-    public MedicalTreatment(String name, String description, Double cost, State state, Type type) {
+    public MedicalTreatment(String name, String description, Double cost, Type type) {
         this.setName(name);
         this.setDescription(description);
         this.setCost(cost);
-        this.setState(state);
+        this.setState(State.PLANNED);
         this.setType(type);
 
         medicalWorkerTreatments = new ArrayList<>();
@@ -64,6 +65,7 @@ public abstract class MedicalTreatment {
     @Enumerated(value = EnumType.STRING)
     public State getState() { return state; }
     public void setState(State state) {
+//        TODO state changer
         if(state == null){throw new NullPointerException("State field cannot be empty.");}
         this.state = state;
     }

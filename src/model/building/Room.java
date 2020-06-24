@@ -49,8 +49,9 @@ public class Room implements Serializable {
     public Integer getRoomNumber() { return roomNumber; }
     public void setRoomNumber(Integer roomNumber) throws Exception {
         if(roomNumber == null){throw new NullPointerException("Room number field cannot be empty.");}
-        if(roomsNumbers.contains(this.roomNumber)){throw new Exception("There is already a room number with this number.");}
-        roomsNumbers.add(this.roomNumber);
+//        TODO fix it
+//        if(roomsNumbers.contains(this.roomNumber)){throw new Exception("There is already a room number with this number.");}
+//        roomsNumbers.add(this.roomNumber);
         this.roomNumber = department.getFloorNumber()*100+roomNumber;
     }
 

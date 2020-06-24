@@ -1,11 +1,10 @@
 package model.actors;
 
-import model.Address;
-import model.MedicalTreatment;
-import model.PatientRoom;
-import model.Person;
+import model.*;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.beans.Transient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,8 @@ public class Patient extends Person {
 
     private List<PatientRoom> patientRooms;
     private List<MedicalTreatment> medicalTreatments;
+
+    private List<Document> documentList = new ArrayList<>();
 
     public Patient() {}
     public Patient(String name, String surname, String PESEL, Address address, String phoneNumber, String mail, LocalDate registrationDate) throws Exception {
@@ -35,7 +36,7 @@ public class Patient extends Person {
                 throw new Exception("Patient hasn't finish last stay in room.");
             }
         }catch(IndexOutOfBoundsException ex){
-            ex.printStackTrace();
+//            ex.printStackTrace();
         }
         this.getPatientRooms().add(stay);
     }
@@ -55,6 +56,21 @@ public class Patient extends Person {
     @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL, orphanRemoval = true)
     public List<MedicalTreatment> getMedicalTreatments() { return medicalTreatments; }
     public void setMedicalTreatments(List<MedicalTreatment> medicalTreatments) { this.medicalTreatments = medicalTreatments; }
+
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Document> getDocumentList() { return documentList; }
+    public void setDocumentList(List<Document> documentList) { this.documentList = documentList; }
+
+    @Transactional
+    public PatientRoom lastPatientRooms() {
+        var tmpList = this.getPatientRooms();
+        System.out.println(tmpList);
+        if (tmpList.size() > 0){
+            return tmpList.get(tmpList.size() - 1);
+        }else{
+            return null;
+        }
+     }
 
     @Override
     public String toString() {

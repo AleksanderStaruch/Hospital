@@ -4,17 +4,18 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity(name = "MedicalWorkerTreatment")
 public class MedicalWorkerTreatment {
     private long id;
     private MedicalWorker medicalWorker;
     private MedicalTreatment medicalTreatment;
-    private LocalDate fromm;
-    private LocalDate to;
+    private LocalDateTime fromm;
+    private LocalDateTime to;
 
     public MedicalWorkerTreatment() {}
-    public MedicalWorkerTreatment(MedicalWorker medicalWorker, MedicalTreatment medicalTreatment, LocalDate fromm, LocalDate to) {
+    public MedicalWorkerTreatment(MedicalWorker medicalWorker, MedicalTreatment medicalTreatment, LocalDateTime fromm, LocalDateTime to) {
         this.setMedicalWorker(medicalWorker);
         this.setMedicalTreatment(medicalTreatment);
         this.setFromm(fromm);
@@ -42,15 +43,15 @@ public class MedicalWorkerTreatment {
     }
 
     @Basic(optional = false)
-    public LocalDate getFromm() { return fromm; }
-    public void setFromm(LocalDate fromm) {
+    public LocalDateTime getFromm() { return fromm; }
+    public void setFromm(LocalDateTime fromm) {
         if(fromm == null){throw new NullPointerException("From field cannot be empty.");}
         this.fromm = fromm;
     }
 
     @Basic
-    public LocalDate getTo() { return to; }
-    public void setTo(LocalDate to) {
+    public LocalDateTime getTo() { return to; }
+    public void setTo(LocalDateTime to) {
         this.to = to;
     }
 
