@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -133,9 +134,9 @@ public class Main {
             Room room16 = Room.createRoom(department5, 21, 8);
 
             PatientRoom patientRoom1 = new PatientRoom(room1, list1.get(0), LocalDate.of(2019, 2, 20), LocalDate.of(2019, 5, 20));
-            PatientRoom patientRoom2 = new PatientRoom(room2, list1.get(0), LocalDate.of(2019, 10, 20), LocalDate.of(2020, 12, 20));
+            PatientRoom patientRoom2 = new PatientRoom(room2, list1.get(0), LocalDate.of(2019, 10, 20), LocalDate.of(2019, 12, 20));
             PatientRoom patientRoom3 = new PatientRoom(room3, list1.get(0), LocalDate.of(2020, 2, 20), LocalDate.of(2020, 5, 20));
-            PatientRoom patientRoom4 = new PatientRoom(room1, list1.get(0), LocalDate.of(2020, 6, 25), null);
+            PatientRoom patientRoom4 = new PatientRoom(room1, list1.get(0), LocalDate.of(2020, 5, 23), null);
             PatientRoom patientRoom5 = new PatientRoom(room1, list1.get(1), LocalDate.of(2019, 2, 20), LocalDate.of(2020, 6, 20));
             PatientRoom patientRoom6 = new PatientRoom(room2, list1.get(2), LocalDate.of(2019, 3, 20), LocalDate.of(2020, 5, 20));
             PatientRoom patientRoom7 = new PatientRoom(room3, list1.get(2), LocalDate.of(2019, 4, 20), null);
@@ -144,25 +145,59 @@ public class Main {
             PatientRoom patientRoom10 = new PatientRoom(room2, list1.get(5), LocalDate.of(2019, 7, 20), null);
             PatientRoom patientRoom11 = new PatientRoom(room2, list1.get(6), LocalDate.of(2019, 8, 20), null);
 
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia1 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia2 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia3 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia4 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia5 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia6 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia7 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia8 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia9 = new MedicalTreatmentLocalAnesthesia();
-            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia10 = new MedicalTreatmentLocalAnesthesia();
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia1 = new MedicalTreatmentLocalAnesthesia("Morfologia","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,"Drug nr. 1", List.of("",""));
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia2 = new MedicalTreatmentLocalAnesthesia("Rezonans magnetyczny","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,null, List.of("klatka","głowa"));
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia3 = new MedicalTreatmentLocalAnesthesia("Morfologia","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,"Drug nr. 2", List.of("",""));
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia4 = new MedicalTreatmentLocalAnesthesia("RTG","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,null, List.of("klatka"));
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia5 = new MedicalTreatmentLocalAnesthesia("EKG","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,null, List.of("klatka"));
 
-            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia1 = new MedicalTreatmentGeneralAnesthesia();
-            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia2 = new MedicalTreatmentGeneralAnesthesia();
-            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia3 = new MedicalTreatmentGeneralAnesthesia();
-            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia4 = new MedicalTreatmentGeneralAnesthesia();
+//            change state to finished
+            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia1 = new MedicalTreatmentGeneralAnesthesia("Operacja wycięcia wyrostka","",MedicalTreatment.State.PLANNED,MedicalTreatment.Type.INVASIVE,0,0);
+            MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia2 = new MedicalTreatmentGeneralAnesthesia("Wycięcie woreczka żółciowego","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.INVASIVE,0,0);
 
+            MedicalWorkerTreatment medicalWorkerTreatment1 = new MedicalWorkerTreatment(list3.get(1), medicalTreatmentLocalAnesthesia1, LocalDateTime.of(2019,2,25,12,13,14), LocalDateTime.of(2019,2,25,13,13,14));
+            MedicalWorkerTreatment medicalWorkerTreatment2 = new MedicalWorkerTreatment(list3.get(2), medicalTreatmentLocalAnesthesia2, LocalDateTime.of(2019,3,25,12,13,14), LocalDateTime.of(2019,3,25,13,13,14));
 
+            MedicalWorkerTreatment medicalWorkerTreatment3 = new MedicalWorkerTreatment(list3.get(3), medicalTreatmentLocalAnesthesia3, LocalDateTime.of(2020,6,24,12,13,14), LocalDateTime.of(2020,6,24,12,33,14));
+            MedicalWorkerTreatment medicalWorkerTreatment4 = new MedicalWorkerTreatment(list3.get(1), medicalTreatmentLocalAnesthesia4, LocalDateTime.of(2020,6,24,15,13,14), LocalDateTime.of(2020,6,24,16,13,14));
+            MedicalWorkerTreatment medicalWorkerTreatment5 = new MedicalWorkerTreatment(list3.get(2), medicalTreatmentLocalAnesthesia5, LocalDateTime.of(2020,6,24,18,13,14), LocalDateTime.of(2020,6,24,18,33,14));
 
+            MedicalWorkerTreatment medicalWorkerTreatment6 = new MedicalWorkerTreatment(list3.get(4), medicalTreatmentGeneralAnesthesia1, LocalDateTime.of(2019,7,25,12,13,14), LocalDateTime.of(2019,7,25,15,13,14));
+            MedicalWorkerTreatment medicalWorkerTreatment7 = new MedicalWorkerTreatment(list4.get(4), medicalTreatmentGeneralAnesthesia1, LocalDateTime.of(2019,7,25,12,13,14), LocalDateTime.of(2019,7,25,15,13,14));
+            MedicalWorkerTreatment medicalWorkerTreatment8 = new MedicalWorkerTreatment(list5.get(4), medicalTreatmentGeneralAnesthesia1, LocalDateTime.of(2019,7,25,12,13,14), LocalDateTime.of(2019,7,25,15,13,14));
 
+            MedicalWorkerTreatment medicalWorkerTreatment9 = new MedicalWorkerTreatment(list3.get(5), medicalTreatmentGeneralAnesthesia2, LocalDateTime.of(2020,5,25,12,13,14), LocalDateTime.of(2020,5,25,20,13,14));
+            MedicalWorkerTreatment medicalWorkerTreatment10 = new MedicalWorkerTreatment(list4.get(5), medicalTreatmentGeneralAnesthesia2, LocalDateTime.of(2020,5,25,12,13,14), LocalDateTime.of(2020,5,25,20,13,14));
+            MedicalWorkerTreatment medicalWorkerTreatment11 = new MedicalWorkerTreatment(list5.get(5), medicalTreatmentGeneralAnesthesia2, LocalDateTime.of(2020,5,25,12,13,14), LocalDateTime.of(2020,5,25,20,13,14));
+
+            medicalTreatmentLocalAnesthesia1.setPatient(list1.get(0));
+            medicalTreatmentLocalAnesthesia2.setPatient(list1.get(0));
+
+            medicalTreatmentLocalAnesthesia3.setPatient(list1.get(0));
+            medicalTreatmentLocalAnesthesia4.setPatient(list1.get(0));
+            medicalTreatmentLocalAnesthesia5.setPatient(list1.get(0));
+
+            medicalTreatmentGeneralAnesthesia1.setPatient(list1.get(2));
+            medicalTreatmentGeneralAnesthesia2.setPatient(list1.get(0));
+
+            session.save(medicalTreatmentLocalAnesthesia1);
+            session.save(medicalTreatmentLocalAnesthesia2);
+            session.save(medicalTreatmentLocalAnesthesia3);
+            session.save(medicalTreatmentLocalAnesthesia4);
+            session.save(medicalTreatmentLocalAnesthesia5);
+            session.save(medicalTreatmentGeneralAnesthesia1);
+            session.save(medicalTreatmentGeneralAnesthesia2);
+            session.save(medicalWorkerTreatment1);
+            session.save(medicalWorkerTreatment2);
+            session.save(medicalWorkerTreatment3);
+            session.save(medicalWorkerTreatment4);
+            session.save(medicalWorkerTreatment5);
+            session.save(medicalWorkerTreatment6);
+            session.save(medicalWorkerTreatment7);
+            session.save(medicalWorkerTreatment8);
+            session.save(medicalWorkerTreatment9);
+            session.save(medicalWorkerTreatment10);
+            session.save(medicalWorkerTreatment11);
             session.save(hospital);
             session.save(department1);
             session.save(department2);
@@ -269,13 +304,20 @@ public class Main {
             System.out.println(p);
         }
         System.out.println(patientList.get(0).getPatientRooms());
-        System.out.println(patientList.get(0).lastPatientRooms());
+        System.out.println(patientList.get(2).getPatientRooms());
+
+        List<Document> documentList  = session.createQuery("from Document ").list();
+        System.out.println("Document");
+        for(Document p :documentList){
+            System.out.println(p);
+        }
+//        System.out.println(patientList.get(0).lastPatientRooms());
 
     }
 
     public static void main(final String[] args) throws Exception {
         try (Session session = getSession()) {
-//            create(session);
+            create(session);
 //            print(session, "Person");
             System.out.println("--------------------");
             print(session);

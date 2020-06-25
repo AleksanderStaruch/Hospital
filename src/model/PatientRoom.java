@@ -6,7 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity(name = "PatientRoom")
 public class PatientRoom {
@@ -58,11 +57,6 @@ public class PatientRoom {
     @Basic()
     public LocalDate getTo() { return to; }
     public void setTo(LocalDate to) { this.to = to; }
-
-
-    private void finish(){
-        this.setTo(LocalDate.now());
-    }
 
     @Override
     public String toString() {

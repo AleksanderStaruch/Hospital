@@ -1,17 +1,18 @@
 package view.discharge;
 
 import model.Document;
-import model.actors.Doctor;
-import model.actors.Patient;
 import org.hibernate.Session;
-import view.DoctorWindow;
-import view.MainWindow;
+import viewElements.StepBarPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 
 public class NewDocumentWindow extends JPanel {
-//    last stay setTo to LocalDateTime
+
     JLabel tittle, doctorName, doctorSurname, patientName, patientSurname, date, city;
     JTextField doctorNameFiled, doctorSurnameFiled, patientNameFiled, patientSurnameFiled, dateFiled, cityFiled;
     JPanel doctorNamePanel, doctorSurnamePanel, patientNamePanel, patientSurnamePanel, datePanel, cityPanel;
@@ -28,6 +29,11 @@ public class NewDocumentWindow extends JPanel {
         tittle.setFont(new Font("Serif", Font.PLAIN, 25));
 
 //        STATUS BAR
+        StepBarPanel stepBarPanel = new StepBarPanel();
+        stepBarPanel.step4(frame, document, session);
+
+        infoPanel.add(stepBarPanel,BorderLayout.PAGE_END);
+
         doctorName = new JLabel("Doctor name: ", SwingConstants.RIGHT);
         doctorSurname = new JLabel("Doctor surname: ", SwingConstants.RIGHT);
         patientName = new JLabel("Patient name: ", SwingConstants.RIGHT);
@@ -55,10 +61,8 @@ public class NewDocumentWindow extends JPanel {
 
         doctorPanel.add(doctorName);doctorPanel.add(doctorNameFiled);
         doctorPanel.add(doctorSurname);doctorPanel.add(doctorSurnameFiled);
-
         patientPanel.add(patientName);patientPanel.add(patientNameFiled);
         patientPanel.add(patientSurname);patientPanel.add(patientSurnameFiled);
-
         dateCityPanel.add(date);dateCityPanel.add(dateFiled);
         dateCityPanel.add(city);dateCityPanel.add(cityFiled);
 
@@ -66,36 +70,66 @@ public class NewDocumentWindow extends JPanel {
         dataPanel.add(patientPanel);dataPanel.add(doctorPanel);dataPanel.add(dateCityPanel);
 
         description = new JTextArea(document.getDescription());
+        description.setFont(new Font("Serif", Font.PLAIN, 16));
         description.setEditable(false);
         JScrollPane scroller = new JScrollPane(description);
-        scroller.setPreferredSize(new Dimension(750, 80));
 
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(dataPanel,BorderLayout.PAGE_START);
-        JPanel scrollerPanel = new JPanel(new BorderLayout(20,20));scrollerPanel.add(scroller);
-        mainPanel.add(scrollerPanel,BorderLayout.CENTER);
+        mainPanel.add(scroller,BorderLayout.CENTER);
 
         buttonPanel = new JPanel();
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
-        submit = new JButton("CLOSE");buttonPanel.add(submit);
+        submit = new JButton("OK");buttonPanel.add(submit);
         frame.getRootPane().setDefaultButton(submit);
         buttonPanel.add(Box.createHorizontalGlue());
         print = new JButton("PRINT");buttonPanel.add(print);
 
         submit.addActionListener(l->{
-//            session.save(document);
-//            session.beginTransaction();
-//            session.getTransaction().commit();
+            var p = document.getPatient().getPatientRooms();
+
+            var pr = p.get(p.size()-1);
+            System.out.println(pr);
+            pr.setTo(LocalDate.now());
+
+            session.update(pr);
+
+            session.save(document);
+            session.beginTransaction();
+            session.getTransaction().commit();
             frame.setContentPane(new JPanel());
             SwingUtilities.updateComponentTreeUI(frame);
         });
 
         print.addActionListener(l->{
+            try {
+                File file = new File("Document_"+patientNameFiled.getText()+"_"+patientSurnameFiled.getText()+"_"+dateFiled.getText()+".txt");
+                file.createNewFile();
+                FileWriter writer = new FileWriter(file);
+
+
+                writer.write(document.getType().toString().toUpperCase()+"\n\r");
+                writer.flush();
+                writer.write("Doctor: "+document.getDoctor().getName()+" "+document.getDoctor().getSurname()+"\n\r");
+                writer.flush();
+                writer.write("Patient: "+document.getPatient().getName()+" "+document.getPatient().getSurname()+"\n\r");
+                writer.flush();
+                writer.write(document.getDate()+" "+cityFiled.getText()+"\n\r");
+                writer.flush();
+                writer.write("Description:"+"\n\r");
+                writer.flush();
+                writer.write(document.getDescription()+"\n\r");
+                writer.flush();
+
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         });
 
-        this.setLayout(new BorderLayout(10,10));
+        this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(5, 25, 10, 25));
         this.add(infoPanel, BorderLayout.PAGE_START);
         this.add(mainPanel, BorderLayout.CENTER);

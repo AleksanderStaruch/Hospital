@@ -23,10 +23,11 @@ public class DoctorWindow extends WorkerWindow {
         super(frame,worker,session);
         this.frame = frame;
         this.worker = worker;
-        dataPanel = new JPanel();
+        dataPanel = new JPanel(new GridLayout(2,1,5,5));
         setMenu();
 
-        dataPanel.add(new JLabel(worker.toString()));
+        dataPanel.add(new JLabel(worker.toString().split("sex")[0]));
+        dataPanel.add(new JLabel("sex"+worker.toString().split("sex")[1]));
 
         tittle = new JLabel("Doctor window:");
         tittle.setHorizontalAlignment(SwingConstants.HORIZONTAL);
@@ -47,12 +48,6 @@ public class DoctorWindow extends WorkerWindow {
             var infoDialog = new InfoDialog("TODO not implemented");
             infoDialog.setVisible(true);
 
-//            var session = MainWindow.getSession();
-//            MedicalTreatment treatment = new MedicalTreatment() {};
-//            session.save(treatment);
-//            session.beginTransaction();
-//            session.getTransaction().commit();
-//            session.close();
         });
 
 
@@ -60,16 +55,7 @@ public class DoctorWindow extends WorkerWindow {
         writeDeathCertificate.addActionListener(l->{
             var infoDialog = new InfoDialog("TODO not implemented");
             infoDialog.setVisible(true);
-//            var session = MainWindow.getSession();
-//
-//
-//
-//            Document document = new Document();
-//            document.setDoctor((Doctor) worker);
-//            session.save(document);
-//            session.beginTransaction();
-//            session.getTransaction().commit();
-//            session.close();
+
         });
 
 
@@ -77,15 +63,7 @@ public class DoctorWindow extends WorkerWindow {
         writePrescription.addActionListener(l->{
             var infoDialog = new InfoDialog("TODO not implemented");
             infoDialog.setVisible(true);
-//            var session = MainWindow.getSession();
-//
-//
-//            Document document = new Document();
-//            document.setDoctor((Doctor) worker);
-//            session.save(document);
-//            session.beginTransaction();
-//            session.getTransaction().commit();
-//            session.close();
+
         });
 
 
@@ -97,7 +75,6 @@ public class DoctorWindow extends WorkerWindow {
             PatientListWindow patientListWindow = new PatientListWindow(frame, list,(Doctor) worker,this.getSession());
             frame.setContentPane(patientListWindow);
             SwingUtilities.updateComponentTreeUI(frame);
-
         });
     }
 }

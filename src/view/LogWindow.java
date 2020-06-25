@@ -60,9 +60,11 @@ public class LogWindow extends JPanel {
     private void actionPerformed(ActionEvent l) {
         System.out.println(login_text.getText() + " " + String.valueOf(password_text.getPassword()));
         List<Worker> list = session.createQuery("from Worker").list();
+
         Worker woker = null;
         boolean loginSuccessful = false;
         for (Worker person : list) {
+//            System.out.println(person);
             if (person.getLogin().equals(login_text.getText()) && person.getPassword().equals(String.valueOf(password_text.getPassword()))) {
                 loginSuccessful = true;
                 woker = person;

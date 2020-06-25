@@ -11,12 +11,11 @@ import java.util.*;
 public abstract class MedicalTreatment {
     public enum State{PLANNED,DURING,EXECUTED,CANCELLED}
     public enum Type{NORMAL,MINIMALLY_INVASIVE,INVASIVE,DANGEROUS}
-    public static int[] TypeDays = {0,2,5,14};
+//    public static int[] TypeDays = {0,2,5,14};
 
     private long id;
     private String name;
     private String description;
-    private Double cost;
     private State state;
     private Type type;
 
@@ -25,11 +24,10 @@ public abstract class MedicalTreatment {
     private List<MedicalWorkerTreatment> medicalWorkerTreatments;
 
     public MedicalTreatment(){}
-    public MedicalTreatment(String name, String description, Double cost, Type type) {
+    public MedicalTreatment(String name, String description,State state, Type type) {
         this.setName(name);
         this.setDescription(description);
-        this.setCost(cost);
-        this.setState(State.PLANNED);
+        this.setState(state);
         this.setType(type);
 
         medicalWorkerTreatments = new ArrayList<>();
@@ -53,13 +51,6 @@ public abstract class MedicalTreatment {
     public void setDescription(String text) {
         if(text == null){throw new NullPointerException("Description field cannot be empty.");}
         this.description = text;
-    }
-
-    @Basic(optional = false)
-    public Double getCost() { return cost; }
-    public void setCost(Double cost) {
-        if(cost == null){throw new NullPointerException("Cost field cannot be empty.");}
-        this.cost = cost;
     }
 
     @Enumerated(value = EnumType.STRING)
@@ -88,13 +79,10 @@ public abstract class MedicalTreatment {
 
     @Override
     public String toString() {
-        return "MedicalTreatment{" +
-                "id=" + id +
+        return "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", cost=" + cost +
                 ", state=" + state +
-                ", type=" + type +
-                '}';
+                ", type=" + type;
     }
 }

@@ -45,13 +45,6 @@ public class ReceptionistWindow extends WorkerWindow {
         registerPatient.addActionListener(l->{
             var infoDialog = new InfoDialog("TODO not implemented");
             infoDialog.setVisible(true);
-
-//            var session = MainWindow.getSession();
-//            Patient patient = new Patient();
-//            session.save(patient);
-//            session.beginTransaction();
-//            session.getTransaction().commit();
-//            session.close();
         });
     }
 }

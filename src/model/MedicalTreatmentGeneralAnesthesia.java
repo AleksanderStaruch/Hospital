@@ -5,17 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-@Entity(name = "MedicalTreatmentGeneralAnesthesia")
+@Entity(name = "MedicalTreatmentGeneralAnesth")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class MedicalTreatmentGeneralAnesthesia extends MedicalTreatment{
     private Integer wakeUpTime;
     private Integer durationOfTheProcedure;
 
     public MedicalTreatmentGeneralAnesthesia() { }
-    public MedicalTreatmentGeneralAnesthesia(String name, String description, Double cost, Type type, Integer wakeUpTime, Integer durationOfTheProcedure) {
-        super(name, description, cost, type);
+    public MedicalTreatmentGeneralAnesthesia(String name, String description,State state, Type type, Integer wakeUpTime, Integer duration) {
+        super(name, description,state,type);
         this.wakeUpTime = wakeUpTime;
-        this.durationOfTheProcedure = durationOfTheProcedure;
+        this.durationOfTheProcedure = duration;
     }
 
     @Basic
@@ -25,8 +25,16 @@ public class MedicalTreatmentGeneralAnesthesia extends MedicalTreatment{
     }
 
     @Basic
-    public Integer getDurationOfTheProcedure() { return durationOfTheProcedure; }
-    public void setDurationOfTheProcedure(Integer durationOfTheProcedure) {
+    public Integer getDuration() { return durationOfTheProcedure; }
+    public void setDuration(Integer durationOfTheProcedure) {
         this.durationOfTheProcedure = durationOfTheProcedure;
+    }
+
+    @Override
+    public String toString() {
+        return "MedicalTreatmentGeneralAnesthesia{" + super.toString() +
+                ",wakeUpTime=" + wakeUpTime +
+                ", durationOfTheProcedure=" + durationOfTheProcedure +
+                '}';
     }
 }

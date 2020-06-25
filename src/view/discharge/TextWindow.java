@@ -5,6 +5,7 @@ import model.actors.Doctor;
 import model.actors.Patient;
 import org.hibernate.Session;
 import view.MainWindow;
+import viewElements.StepBarPanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,13 +25,16 @@ public class TextWindow extends JPanel {
         tittle.setFont(new Font("Serif", Font.PLAIN, 25));
 
 //        STATUS BAR
+        StepBarPanel stepBarPanel = new StepBarPanel();
+        stepBarPanel.step3(frame, patient, doctor, session);
 
+        infoPanel.add(stepBarPanel,BorderLayout.PAGE_END);
 
         description = new JTextArea();
         description.setFont(new Font("Serif", Font.PLAIN, 16));
 
         buttonPanel = new JPanel();
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 5));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
         submit = new JButton("SUBMIT");buttonPanel.add(submit);
         frame.getRootPane().setDefaultButton(submit);
