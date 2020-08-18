@@ -58,8 +58,7 @@ public class PatientInfoWindow extends JPanel {
         sexPanel.add(sex);sexPanel.add(sexField);
 
         patientPanel = new JPanel();
-        patientPanel.setLayout(new GridLayout(15,1,5,5));
-        patientPanel.add(new JPanel());
+        patientPanel.setLayout(new GridLayout(5,1,5,5));
         patientPanel.add(namePanel);
         patientPanel.add(surnamePanel);
         patientPanel.add(dateOfBirthPanel);

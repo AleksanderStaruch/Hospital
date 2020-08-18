@@ -26,8 +26,7 @@ public class DoctorWindow extends WorkerWindow {
         dataPanel = new JPanel(new GridLayout(2,1,5,5));
         setMenu();
 
-        dataPanel.add(new JLabel(worker.toString().split("sex")[0]));
-        dataPanel.add(new JLabel("sex"+worker.toString().split("sex")[1]));
+//        dataPanel.add(new JLabel(worker.toString()));
 
         tittle = new JLabel("Doctor window:");
         tittle.setHorizontalAlignment(SwingConstants.HORIZONTAL);

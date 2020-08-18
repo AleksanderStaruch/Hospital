@@ -26,7 +26,7 @@ public class HospitalAdministratorWindow extends WorkerWindow {
 
         dataPanel = new JPanel();
 
-        dataPanel.add(new JLabel(worker.toString()));
+//        dataPanel.add(new JLabel(worker.toString()));
 
         tittle = new JLabel("HospitalAdministrator window:");
         tittle.setHorizontalAlignment(SwingConstants.HORIZONTAL);

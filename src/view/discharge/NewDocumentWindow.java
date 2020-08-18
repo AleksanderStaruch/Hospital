@@ -84,7 +84,7 @@ public class NewDocumentWindow extends JPanel {
         submit = new JButton("OK");buttonPanel.add(submit);
         frame.getRootPane().setDefaultButton(submit);
         buttonPanel.add(Box.createHorizontalGlue());
-        print = new JButton("PRINT");buttonPanel.add(print);
+        print = new JButton("PRINT", new ImageIcon("Szpital-GUII.jpg"));buttonPanel.add(print);
 
         submit.addActionListener(l->{
             var p = document.getPatient().getPatientRooms();

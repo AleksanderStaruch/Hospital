@@ -27,7 +27,7 @@ public class SurgeonWindow extends WorkerWindow{
 
         dataPanel = new JPanel();
 
-        dataPanel.add(new JLabel(worker.toString()));
+//        dataPanel.add(new JLabel(worker.toString()));
 
         tittle = new JLabel("Surgeon window:");
         tittle.setHorizontalAlignment(SwingConstants.HORIZONTAL);

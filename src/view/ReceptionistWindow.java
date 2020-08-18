@@ -24,7 +24,7 @@ public class ReceptionistWindow extends WorkerWindow {
 
         dataPanel = new JPanel();
 
-        dataPanel.add(new JLabel(worker.toString()));
+//        dataPanel.add(new JLabel(worker.toString()));
 
         tittle = new JLabel("Receptionist window:");
         tittle.setHorizontalAlignment(SwingConstants.HORIZONTAL);

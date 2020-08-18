@@ -151,6 +151,8 @@ public class Main {
             MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia4 = new MedicalTreatmentLocalAnesthesia("RTG","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,null, List.of("klatka"));
             MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia5 = new MedicalTreatmentLocalAnesthesia("EKG","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,null, List.of("klatka"));
 
+            MedicalTreatmentLocalAnesthesia medicalTreatmentLocalAnesthesia6 = new MedicalTreatmentLocalAnesthesia("Morfologia","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.NORMAL,null, List.of("klatka"));
+
 //            change state to finished
             MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia1 = new MedicalTreatmentGeneralAnesthesia("Operacja wycięcia wyrostka","",MedicalTreatment.State.PLANNED,MedicalTreatment.Type.INVASIVE,0,0);
             MedicalTreatmentGeneralAnesthesia medicalTreatmentGeneralAnesthesia2 = new MedicalTreatmentGeneralAnesthesia("Wycięcie woreczka żółciowego","",MedicalTreatment.State.EXECUTED,MedicalTreatment.Type.INVASIVE,0,0);
@@ -161,6 +163,8 @@ public class Main {
             MedicalWorkerTreatment medicalWorkerTreatment3 = new MedicalWorkerTreatment(list3.get(3), medicalTreatmentLocalAnesthesia3, LocalDateTime.of(2020,6,24,12,13,14), LocalDateTime.of(2020,6,24,12,33,14));
             MedicalWorkerTreatment medicalWorkerTreatment4 = new MedicalWorkerTreatment(list3.get(1), medicalTreatmentLocalAnesthesia4, LocalDateTime.of(2020,6,24,15,13,14), LocalDateTime.of(2020,6,24,16,13,14));
             MedicalWorkerTreatment medicalWorkerTreatment5 = new MedicalWorkerTreatment(list3.get(2), medicalTreatmentLocalAnesthesia5, LocalDateTime.of(2020,6,24,18,13,14), LocalDateTime.of(2020,6,24,18,33,14));
+
+            MedicalWorkerTreatment medicalWorkerTreatment12 = new MedicalWorkerTreatment(list3.get(5), medicalTreatmentLocalAnesthesia6, LocalDateTime.of(2020,6,24,18,13,14), LocalDateTime.of(2020,6,24,18,33,14));
 
             MedicalWorkerTreatment medicalWorkerTreatment6 = new MedicalWorkerTreatment(list3.get(4), medicalTreatmentGeneralAnesthesia1, LocalDateTime.of(2019,7,25,12,13,14), LocalDateTime.of(2019,7,25,15,13,14));
             MedicalWorkerTreatment medicalWorkerTreatment7 = new MedicalWorkerTreatment(list4.get(4), medicalTreatmentGeneralAnesthesia1, LocalDateTime.of(2019,7,25,12,13,14), LocalDateTime.of(2019,7,25,15,13,14));
@@ -177,6 +181,8 @@ public class Main {
             medicalTreatmentLocalAnesthesia4.setPatient(list1.get(0));
             medicalTreatmentLocalAnesthesia5.setPatient(list1.get(0));
 
+            medicalTreatmentLocalAnesthesia6.setPatient(list1.get(4));
+
             medicalTreatmentGeneralAnesthesia1.setPatient(list1.get(2));
             medicalTreatmentGeneralAnesthesia2.setPatient(list1.get(0));
 
@@ -185,8 +191,11 @@ public class Main {
             session.save(medicalTreatmentLocalAnesthesia3);
             session.save(medicalTreatmentLocalAnesthesia4);
             session.save(medicalTreatmentLocalAnesthesia5);
+            session.save(medicalTreatmentLocalAnesthesia6);
+
             session.save(medicalTreatmentGeneralAnesthesia1);
             session.save(medicalTreatmentGeneralAnesthesia2);
+
             session.save(medicalWorkerTreatment1);
             session.save(medicalWorkerTreatment2);
             session.save(medicalWorkerTreatment3);
@@ -198,6 +207,8 @@ public class Main {
             session.save(medicalWorkerTreatment9);
             session.save(medicalWorkerTreatment10);
             session.save(medicalWorkerTreatment11);
+            session.save(medicalWorkerTreatment12);
+
             session.save(hospital);
             session.save(department1);
             session.save(department2);

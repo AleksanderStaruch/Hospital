@@ -26,13 +26,6 @@ public class Doctor extends MedicalWorker {
         System.out.println("Doctor "+getName()+" "+getSurname()+" is performing medical treatment");
     }
 
-//    TODO implement finishPatientStay
-    public void finishPatientStay() {
-        System.out.println("Doctor "+getName()+" "+getSurname()+" is performing medical treatment");
-    }
-
-
-
     @Basic(optional = false)
     public String getSpecialization() { return specialization; }
     public void setSpecialization(String specialization) {
